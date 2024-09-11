@@ -1,7 +1,7 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./src/routes/userRoutes');
 require('dotenv').config();  // Carrega variáveis do .env
-require('./config/db'); // Conecta ao BD
+require('./src/config/db'); // Conecta ao BD
 
 const app = express();
 
