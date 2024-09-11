@@ -9,7 +9,17 @@ const createUser = async (userData) => {
     return await user.save(); // Cria um novo usuário
 };
 
+const getUserById = async (id) => {
+    return await User.findById(id); // Busca um usuário específico pelo ID
+};
+
+const updateUser = async (id, userData) => {
+    return await User.findByIdAndUpdate(id, userData, { new: true }); // Atualiza o usuário com os novos dados
+};
+
 module.exports = {
     getUsers,
-    createUser
+    getUserById,
+    createUser,
+    updateUser
 };
