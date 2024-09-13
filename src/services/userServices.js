@@ -1,30 +1,40 @@
 const User = require('../models/userModel');
 
-const getUsers = async () => {
-    return await User.find(); // Obtém todos os usuários
+// Os nomes estão bem autoexplicativos para precisar comentar algum...
+
+const getallUsers = async () => {
+    return await User.find();
 };
 
-const getUserById = async (id) => {
-    return await User.findById(id); // Busca um usuário específico pelo ID
+const getUserById = async (userData) => {
+    return await User.findOne(userData);
 };
 
 const createUser = async (userData) => {
     const user = new User(userData);
-    return await user.save(); // Cria um novo usuário
+    return await user.save();
 };
 
 const deleteUser = async (userData) => {
-    return await User.findOneAndDelete(userData); // Busca um usuário específico pelo ID
+    const deletedUser = await User.findOneAndDelete(userData);
+    if (!deletedUser)
+        throw new Error("Usuário não encontrado");
+
+    return true;
 };
 
-const updateUser = async (id, userData) => {
-    return await User.findByIdAndUpdate(id, userData, { new: true }); // Atualiza o usuário com os novos dados
+const updateUser = async (currentUser, newUser) => {
+    const updatedUser = await User.findOneAndUpdate(currentUser, newUser, { new: true ,runValidators: true });
+    if (!updatedUser) {
+        throw new Error("Usuário não encontrado");
+    }
+    return true;
 };
 
-const isEspecial = async ({ name, username, email }) => {
-    const regex = /[^\w\s@à-ÿÀ-Ÿ]/g;
+const isEspecial = async ({name = "", username ="", email="", password=""}) => {
+    const regex = /[^\w\s@.,à-ÿÀ-Ÿ]/g;
 
-    if (regex.test(name) || regex.test(username) || regex.test(email)) {
+    if (regex.test(name) || regex.test(username) || regex.test(email) || regex.test(password)) {
         throw new TypeError("CaractereEspecial");
     }
 
@@ -32,7 +42,7 @@ const isEspecial = async ({ name, username, email }) => {
 };
 
 module.exports = {
-    getUsers,
+    getallUsers,
     getUserById,
     deleteUser,
     createUser,

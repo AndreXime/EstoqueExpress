@@ -8,16 +8,16 @@
 <body class="bg-gray-100"></body>
     <header class="bg-primary text-white p-4">
         <div class="container">
-            <h1 class="h2 fw-bold">Site do André</h1>
-            <p class="small">Bem-vindo ao meu formulário legal</p>
+            <h1 class="h1 fw-bold">Site do André</h1>
+            <p class="medium">Bem-vindo ao meu formulário legal</p>
         </div>
     </header>
 
     <main>
         <section class="mt-5">
             <div class="container mt-5">
-                <h2>Cadastro</h2>
-                <form id="userForm" class="row">
+                <h1>Create</h1>
+                <form id="userSave" class="row p-5 bg-light">
                     <!-- Campo Nome -->
                     <div class="col-md-6 mb-3">
                         <label for="nome" class="form-label">Nome completo</label>
@@ -43,12 +43,81 @@
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </form>
-                <div id="alert" class="alert d-none mt-3" role="alert"></div>
+                <div id="alertSave" class="alert d-none mt-3" role="alert"></div>
             </div>
         </section>
+        <section class="mt-5">
+            <div class="container mt-5">
+                <h1>Delete</h1>
+                <form id="userDelete" class="row p-5 bg-light">
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" name="email" id="email" required  placeholder="Digite seu e-mail">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" name="password" id="password" required placeholder="Digite sua senha">
+                    </div>
+
+                    <!-- Botão Enviar -->
+                    <div class="col-md-6 mb-3">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+                <div id="alertDelete" class="alert d-none mt-3" role="alert"></div>
+            </div>
+        </section>
+        <section class="mt-5">
+            <div class="container mt-5">
+                <h1>Update</h1>
+                <form id="userUpdate" class="row p-5 bg-light">
+                    <div class="col-12 mb-3">
+                        <h4>Dados Atuais</h4>
+                    </div>
+                    <!-- Campo Username -->
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">E-mail atual</label>
+                        <input type="email" class="form-control" name="email" id="email" required  placeholder="Digite seu e-mail">
+                    </div>
+                    <!-- Campo Senha -->
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">Senha atual</label>
+                        <input type="password" class="form-control" name="password" id="password" required placeholder="Digite sua senha">
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <hr>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <h4>Novos Dados</h4>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="nome" class="form-label">Novo nome</label>
+                        <input type="text" class="form-control" name="newname" id="name" required placeholder="Digite seu nome">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="username" class="form-label">Novo username</label>
+                        <input type="text" class="form-control" name="newusername" id="username" required placeholder="Digite seu username">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">Novo e-mail</label>
+                        <input type="email" class="form-control" name="newemail" id="email" required  placeholder="Digite seu e-mail">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">Novo senha</label>
+                        <input type="password" class="form-control" name="newpassword" id="password" required placeholder="Digite sua senha">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+                <div id="alertUpdate" class="alert d-none mt-3" role="alert"></div>
+            </div>
+        </section>
+        <!--Todos users-->
         <section class="container mt-5">
             <table class="table table-bordered table-striped mt-3">
-                <h2>Usuários cadastrados</h2>
+                <h1>Read</h1>
                 <thead class="table-light">
                     <tr>
                         <th>Nome</th>
@@ -75,18 +144,18 @@
 
     <footer class="bg-primary text-white py-4 mt-5">
         <div class="container text-center">
-            <p class="small">&copy; 2024 Meu Site. Todos os direitos reservados.</p>
+            <p class="medium">&copy; 2024 Meu Site. Todos os direitos reservados.</p>
         </div>
     </footer>
     
     <script>
-        document.getElementById('userForm').addEventListener('submit', async (event) => {
+        document.getElementById('userSave').addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData.entries()); // Converte FormData para um objeto
 
-            const alertElement = document.getElementById('alert');
+            const alertElement = document.getElementById('alertSave');
             alertElement.classList.remove('d-none');
             try {
                 const response = await fetch('/save', {
@@ -96,24 +165,83 @@
                     },
                     body: JSON.stringify(data) // Envia os dados como JSON
                 });
+
                 //Alerta em baixo do formulario
-                
+                const result = await response.json();
                 if (!response.ok) {
-                    const errorData = await response.json();
                     alertElement.classList.add('alert-danger');
                     alertElement.classList.remove('alert-success');
-                    if (errorData.message === 'Já existe') {
-                        alertElement.textContent = 'Já existe alguém com esse username e/ou email.';
-                    } else if (errorData.message === 'Caracteres especiais') {
-                        alertElement.textContent = 'Não é possivel escrever com caracteres especiais.';
-                    } else {
-                        alertElement.textContent = 'Ocorreu um erro ao criar a conta. Tente novamente.';
-                    }
-                    
+                    alertElement.textContent = result.message;
                 }else{
                     alertElement.classList.add('alert-success');
                     alertElement.classList.remove('alert-danger');
-                    alertElement.textContent = 'Conta criada com sucesso!';
+                    alertElement.textContent = result.message;
+                }
+
+            } catch (error) {
+                alertElement.textContent = 'Algo deu errado. Tente novamente.';
+            }
+        });
+        document.getElementById('userDelete').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries()); // Converte FormData para um objeto
+
+            const alertElement = document.getElementById('alertDelete');
+            alertElement.classList.remove('d-none');
+            try {
+                const response = await fetch('/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data) // Envia os dados como JSON
+                });
+
+                //Alerta em baixo do formulario
+                const result = await response.json();
+                if (!response.ok) {
+                    alertElement.classList.add('alert-danger');
+                    alertElement.classList.remove('alert-success');
+                    alertElement.textContent = result.message;
+                }else{
+                    alertElement.classList.add('alert-success');
+                    alertElement.classList.remove('alert-danger');
+                    alertElement.textContent = result.message;
+                }
+
+            } catch (error) {
+                alertElement.textContent = 'Algo deu errado. Tente novamente.';
+            }
+        });
+        document.getElementById('userUpdate').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries()); // Converte FormData para um objeto
+
+            const alertElement = document.getElementById('alertUpdate');
+            alertElement.classList.remove('d-none');
+            try {
+                const response = await fetch('/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data) // Envia os dados como JSON
+                });
+
+                //Alerta em baixo do formulario
+                const result = await response.json();
+                if (!response.ok) {
+                    alertElement.classList.add('alert-danger');
+                    alertElement.classList.remove('alert-success');
+                    alertElement.textContent = result.message;
+                }else{
+                    alertElement.classList.add('alert-success');
+                    alertElement.classList.remove('alert-danger');
+                    alertElement.textContent = result.message;
                 }
 
             } catch (error) {
