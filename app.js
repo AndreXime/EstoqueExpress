@@ -1,5 +1,5 @@
 const express = require('express');
-const userRoutes = require('./src/routes/userRoutes');
+const routes = require('./src/routes/allRoutes');
 require('dotenv').config();  // Carrega variáveis do .env
 require('./src/config/db'); // Conecta ao BD
 
@@ -14,7 +14,7 @@ app.use(express.static('public')); // Para arquivos estáticos
 app.use(express.urlencoded({ extended: true })); // Para entender dados de formulários
 
 // Rotas
-app.use('/', userRoutes);
+app.use('/', routes);
 
 // Inicializando servidor
 const port = process.env.PORT || 3000;

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy-bootstrap": "del public\\css\\bootstrap.min.css && del public\\js\\bootstrap.bundle.min.js && xcopy /Y node_modules\\bootstrap\\dist\\css\\bootstrap.min.css public\\css && xcopy /Y node_modules\\bootstrap\\dist\\js\\bootstrap.bundle.min.js public\\js",
     "start": "node app.js"
   },
   "keywords": [],
@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^5.0.0",

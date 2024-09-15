@@ -7,7 +7,7 @@ const renderPage = async (req, res) => {
     if (req.query.id) {  // Se um ID for passado na query string (?id=...)
         user = await uService.getUserById(req.query.id);
     }
-    res.render('index', { users });
+    res.render('pageCrud', { users });
 };
 const saveUser = async (req, res) => {
     try{
