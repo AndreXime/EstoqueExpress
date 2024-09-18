@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const uController = require('../controllers/userController');
-const pController = require('../controllers/pageController');
+const pController = require('../controllers/homeController');
+const dController = require('../controllers/dashboardController')
 
-router.get('/', pController.getIndex);
-router.get('/login', pController.getLogin);
-router.post('/login', pController.postLogin);
+router.get('/', pController.getHome);
+router.get('/entrar', pController.getLoginRegister);
 
-router.get ('/api', uController.renderCrud);
-router.post('/api/login', uController.loginUser);
-router.post('/api/register', uController.registerUser);
-router.post('/api/update', uController.updateUser);
-router.post('/api/delete', uController.deleteUser);
+router.post('/login', pController.login);
+router.post('/register',pController.register);
+
+router.get('/dashboard',dController.getDash)
 
 
 module.exports = router;

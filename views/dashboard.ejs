@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EverythingAtOnce - Dashboard</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <style>
+        /* Animação personalizada com keyframes */
+        @keyframes aparecer {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+    
+        .animar-criacao {
+          animation: aparecer 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <div class="container px-5">
+            <a class="navbar-brand" href="#!"><img src="/img/logo.png" width="250" height="35"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+                </ul>
+            </div>
+        </div>
+</nav>
+
+<main>
+    <div class="container mt-5">
+        <button id="criarObjeto" class="btn btn-primary">Criar Objeto</button>
+        <div id="objetoContainer" class="row mt-3"></div>
+    </div>
+</main>
+
+<footer class="py-4 bg-dark border-top">
+    <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
+</footer>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/popper.min.js"></script>
+<script>
+document.getElementById('criarObjeto').addEventListener('click', function() {
+    // Cria o elemento a ser animado
+    const card = document.createElement('div');
+    card.classList.add('col-md-4', 'mb-4'); // Adiciona classe para coluna e margem
+    card.innerHTML = `
+      <div class="card animar-criacao">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagem">
+        <div class="card-body">
+          <h5 class="card-title">Título do Objeto</h5>
+          <p class="card-text">Esse é um objeto animado.</p>
+          <a href="#" class="btn btn-primary">Detalhes</a>
+        </div>
+      </div>
+    `;
+
+    // Adiciona o card ao container
+    document.getElementById('objetoContainer').appendChild(card);
+  });
+</script>
+</body>
+</html>

@@ -7,7 +7,7 @@ const searchUser = async (userData) => {
     if(!user)
         throw new Error("Usuario não existe")
 
-    return true
+    return user;
 };
 
 const createUser = async (userData) => {
@@ -20,7 +20,7 @@ const deleteUser = async (userData) => {
     if (!deletedUser)
         throw new Error("Usuário não existe");
 
-    return true;
+    return deletedUser;
 };
 
 const updateUser = async (currentUser, newUser) => {
@@ -28,7 +28,7 @@ const updateUser = async (currentUser, newUser) => {
     if (!updatedUser) {
         throw new Error("Usuário não existe");
     }
-    return true;
+    return updatedUser;
 };
 
 module.exports = {

@@ -4,22 +4,21 @@ const rules = {
     register: {
         email: 'required|email',
         password: 'required|min:6|confirmed',
+        password_confirmation: 'required',
         name: 'required|string|max:255',
     },
     search: {
         email: 'required|email',
         password: 'required|min:6',
     },
-    update: {
-        email: 'email',
-        password: 'min:6|confirmed',
-        name: 'string|max:255',
-    },
 };
 
-const validate = (data, type) => {
-    const validation = new Validator(data, rules[type]);
-    return validation;
+const validate = async (data, type) => {
+    const validator = new Validator(data, rules[type]);
+    if (validator.fails()){
+        throw {errors: validator.errors.all()}; // Lançando os erros
+    }
+    return true
 };
 
 module.exports = { validate };
