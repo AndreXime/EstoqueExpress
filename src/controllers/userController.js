@@ -1,62 +1,76 @@
 const uService = require('../services/userServices');
+const { validate } = require('../middlewares/validator');
 
-
-const renderPage = async (req, res) => {
-    const users = await uService.getallUsers();
-    let user = {}
-    if (req.query.id) {  // Se um ID for passado na query string (?id=...)
-        user = await uService.getUserById(req.query.id);
-    }
-    res.render('pageCrud', { users });
+const renderCrud = async (req, res) => {    
+    res.render('pageCrud');
 };
-const saveUser = async (req, res) => {
+const registerUser = async (req, res) => {
     try{
-        const { name, email, password, username } = req.body;
-        await uService.isEspecial({name, username, email, password});
-        await uService.createUser({ name, username, email, password});
+        const { name, email, password} = req.body;
+        
+        const validation = validate({ email, password, name }, 'register');
+        if (validation.fails())
+            res.status(400).json({ success: false , message: "Validation failed!"});
+        
+
+        await uService.createUser({ name, email, password});
         res.status(200).json({ success: true , message: "Conta criada com sucesso!"});
     } catch (err) {
-        if(err instanceof TypeError ){
-            res.status(400).json({ success: false , message: "Não é possivel escrever com caracteres especiais." });
-        }else{
-            res.status(400).json({ success: false , message: "Já existe alguém com esse username e/ou email."});
-        }
+        res.status(400).json({ success: false , message: "Já existe alguém com esse username e/ou email."});
+    }
+};
+const loginUser = async (req, res) => {
+    try{
+        const { email, password } = req;
+
+        const validation = validate({ email, password }, 'search');
+        if (validation.fails())
+            res.status(400).json({ success: false , message: "Validation failed!"});
+
+        await uService.searchUser({ email, password});
+        res.status(200).json({ success: true , message: "Conta encontrada" });
+    } catch (err) {
+        res.status(400).json({ success: false , message: "Já existe uma conta com essas crendenciais"});
     }
 };
 const deleteUser = async (req, res) => {
     try{
         const { email, password } = req.body;
-        await uService.isEspecial({ email: email , password: password} );
+
+        const validation = validate({ email, password }, 'search');
+        if (validation.fails())
+            res.status(400).json({ success: false , message: "Validation failed!"});
+
+
         await uService.deleteUser({ email, password});
         res.status(200).json({ success: true , message: "Conta deletada com sucesso!"});
     } catch (err) {
-        if(err instanceof TypeError ){
-            res.status(400).json({ success: false , message: "Não é possivel escrever com caracteres especiais." });
-        }else{
-            res.status(400).json({ success: false , message: "Não existe uma conta com essas crendenciais"});
-        }
+        res.status(400).json({ success: false , message: "Não existe uma conta com essas crendenciais"});
     }
 };
 const updateUser = async (req, res) => {
     try{
-        const { email, password, newname, newusername, newemail, newpassword } = req.body;
-        await uService.isEspecial({ email: email, password: password} );
-        await uService.isEspecial({ email: newemail, password: newpassword, name:newname, username: newusername} );
-        await uService.updateUser({ email: email, password: password },{ name: newname, username: newusername, email: newemail, password: newpassword });
+        const { email, password, newname, newemail, newpassword } = req.body;
+
+        const validation = validate({ email, password }, 'search');
+        const validation2 = validate({ newemail, newpassword, newname }, 'update');
+        
+        if (validation.fails() || validation2.fails())
+            res.status(400).json({ success: false , message: "Validation failed!"});
+
+
+        await uService.updateUser({ email: email, password: password },{ name: newname, email: newemail, password: newpassword });
         res.status(200).json({ success: true , message: "Conta atualizada com sucesso!"});
     } catch (err) {
-        if(err instanceof TypeError ){
-            res.status(400).json({ success: false , message: "Não é possivel escrever com caracteres especiais." });
-        }else{
-            res.status(400).json({ success: false , message: "Essas crendeciais estão erradas."});
-        }
+        res.status(400).json({ success: false , message: "Essas crendeciais estão erradas."});
     }
 };
 
 
 module.exports = {
-    renderPage,
-    saveUser,
+    renderCrud,
+    registerUser,
+    loginUser,
     deleteUser,
     updateUser
 };

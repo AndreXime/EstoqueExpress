@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EverythingAtOnce - Login</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-dark text-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <div class="container px-5">
+            <a class="navbar-brand" href="#!"><img src="/img/logo.png" width="250" height="35"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+                </ul>
+            </div>
+        </div>
+</nav>
+
+<main style="background-color: #303030;" class="container w-50 p-5 my-4 flex-grow-1">
+   <!-- Pills navs -->
+  <ul style="cursor: pointer;" class="nav nav-pills nav-justified mb-5 bg-dark text-white">
+    <li class="nav-item">
+      <a class="nav-link active" id="tab-login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab-register">Registrar</a>
+    </li>
+  </ul>
+ 
+  <!-- Pills content -->
+  <div class="tab-content">
+    <div class="tab-pane show active" id="pills-login">
+      <form action="/login" method="POST">
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="loginName">Email</label>
+          <input type="email" id="loginName" name="email" class="form-control" />
+        </div>
+  
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" name="password" class="form-control" />
+        </div>
+  
+        <!-- 2 column grid layout -->
+        <div class="row mb-4">
+          <div class="col-md-6 d-flex justify-content-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-3 mb-md-0">
+              <!-- <input class="form-check-input" type="checkbox" name="remember" value="" id="loginCheck" checked /> -->
+              <label class="form-check-label" for="loginCheck"> Lembrar de mim </label>
+            </div>
+          </div>
+  
+          <div class="col-md-6 d-flex justify-content-center">
+            <!-- Simple link -->
+            <a href="#!">Esqueceu a senha?</a>
+          </div>
+        </div>
+  
+        <!-- Submit button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Fazer login</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="tab-pane" id="pills-register">
+      <form action="/register" method="POST">
+        <!-- Name input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="registerName">Nome</label>
+          <input type="text" id="registerName" name="name" class="form-control" />
+        </div>
+  
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" name="email" class="form-control" />
+        </div>
+  
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" name="senha" class="form-control" />
+        </div>
+  
+        <!-- Repeat Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="registerRepeatPassword">Senha novamente</label>
+          <input type="password" id="registerRepeatPassword" name="senha2" class="form-control" />
+        </div>
+  
+        <!-- Submit button -->
+        <div class="text-center mt-5"> <!-- Adiciona um wrapper com text-center -->
+          <button type="submit" class="btn btn-primary">Fazer cadastro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="py-4 bg-dark border-top">
+        <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
+</footer>
+<script src="/js/bootstrap.bundle.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabLogin = document.getElementById("tab-login");
+    const tabRegister = document.getElementById("tab-register");
+    const pillsLogin = document.getElementById("pills-login");
+    const pillsRegister = document.getElementById("pills-register");
+
+    // Função para mostrar a aba de Login
+    tabLogin.addEventListener("click", function (event) {
+      event.preventDefault(); 
+      // Alterar classes para tornar a aba de login ativa
+      tabLogin.classList.add("active");
+      tabRegister.classList.remove("active");
+
+      // Mostrar o conteúdo de Login e esconder o de Register
+      pillsLogin.classList.add("show", "active");
+      pillsRegister.classList.remove("show", "active");
+    });
+
+    // Função para mostrar a aba de Register
+    tabRegister.addEventListener("click", function (event) {
+      event.preventDefault();
+      // Alterar classes para tornar a aba de registro ativa
+      tabRegister.classList.add("active");
+      tabLogin.classList.remove("active");
+
+      // Mostrar o conteúdo de Register e esconder o de Login
+      pillsRegister.classList.add("show", "active");
+      pillsLogin.classList.remove("show", "active");
+    });
+  });
+</script>
+</body>
+</html>

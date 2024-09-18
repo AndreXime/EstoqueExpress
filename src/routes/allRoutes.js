@@ -3,11 +3,15 @@ const router = express.Router();
 const uController = require('../controllers/userController');
 const pController = require('../controllers/pageController');
 
-router.get ('/'      ,uController.renderPage);
-router.post('/save'  ,uController.saveUser);
-router.post('/update',uController.updateUser);
-router.post('/delete',uController.deleteUser);
+router.get('/', pController.getIndex);
+router.get('/login', pController.getLogin);
+router.post('/login', pController.postLogin);
 
-router.get ('/inicio',pController.renderPage);
+router.get ('/api', uController.renderCrud);
+router.post('/api/login', uController.loginUser);
+router.post('/api/register', uController.registerUser);
+router.post('/api/update', uController.updateUser);
+router.post('/api/delete', uController.deleteUser);
+
 
 module.exports = router;
