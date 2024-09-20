@@ -13,6 +13,8 @@ app.use(express.json()); // Para entender requisições JSON
 app.use(express.static('public')); // Para arquivos estáticos
 app.use(express.urlencoded({ extended: true })); // Para entender dados de formulários
 
+app.set('x-powered-by', false);
+
 //Medir o tempo de resposta
 app.use((req, res, next) => {
     const start = process.hrtime(); // Marca o início da requisição com alta precisão
@@ -33,6 +35,6 @@ app.use('/', routes);
 
 // Inicializando servidor
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+app.listen(port,'0.0.0.0',() => {
     console.log(`Server running at http://localhost:${port}`);
 });

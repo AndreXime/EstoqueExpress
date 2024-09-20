@@ -22,11 +22,9 @@ const register = async (req,res) => {
     try{
         const response = await auth.registerUser(req.body)
 
-        console.log("Deu certo",response);
         return res.redirect('/dashboard');
     }catch(err){
 
-        console.log("Aconteceu erros:",err);
         return res.redirect('/entrar');
     }
 }
