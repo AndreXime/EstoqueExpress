@@ -23,7 +23,13 @@ const appendCard = async (req,res) =>{
     }
 }
 
+const getMenu = async (req,res) =>{
+    const cards = [];
+    res.render('menu',{cards});
+}
+
 module.exports = {
     getDash,
+    getMenu,
     appendCard
 }

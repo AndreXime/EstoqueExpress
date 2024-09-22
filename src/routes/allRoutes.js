@@ -9,6 +9,7 @@ router.get('/entrar', pController.getLoginRegister);
 router.post('/login', pController.login);
 router.post('/register',pController.register);
 
+router.get('/menu',dController.getMenu);
 router.get('/dashboard',dController.getDash);
 router.post('/api/appendCard',dController.appendCard);
 

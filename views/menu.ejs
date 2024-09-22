@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -42,7 +41,6 @@
     </style>
 </head>
 <body style="display: none;" class="d-flex flex-column">
-<div id="carregamento"></div>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid px-5 d-flex align-items-center">
         <div class="d-flex align-items-center">
@@ -64,73 +62,55 @@
     </div>
 </nav>
 
-<main class="container flex-grow-1 main-content">
+<main class="container flex-grow-1">
   <div class="container mt-5">
-    <div class="row mt-3">
-      <div class="col-md mb-4">
-          <div class="card animar-criacao">
-              <div class="card-body">
-                <form id="cardCreator">
-                  <div class="row">
-                    <div class="mb-3 col-md-4">
-                      <label for="nameProduct" class="form-label">Nome do produto</label>
-                      <input id="nameProduct" class="form-control" type="text" name="nameProduct">
-                    </div>
-                    <div class="mb-3 col-md-4">
-                      <label for="priceProduct" class="form-label">Preço do produto</label>
-                      <input id="priceProduct" class="form-control" type="text" name="priceProduct">
-                    </div>
-                    <div class="mb-3 col-md-4">
-                      <label for="categoryProduct" class="form-label">Categoria do produto</label>
-                      <input id="categoryProduct" class="form-control" type="text" name="categoryProduct">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4 mb-3">
-                      <label for="qtdProduct" class="form-label">Quantidade do produto</label>
-                      <input class="form-control" type="number" name="qtdProduct" id="qtdProduct" oninput="validateNumber(this)">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="dateProduct" class="form-label">Vencimento do produto</label>
-                      <input class="form-control" type="date" name="dateProduct" id="dateProduct">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                      <label for="fornecedorProduct" class="form-label">Fornecedor do produto</label>
-                      <input id="fornecedorProduct" class="form-control" type="text" name="fornecedorProduct">
-                    </div>
-                  </div>
-                  <input class="btn btn-primary" id="criarObjeto" type="submit" value="Criar objeto">
-                </form>
-              </div>
-              <div id="popup" class="popup" style="display: none;">
-                Objeto criado com sucesso!
-              </div>
-          </div>
-      </div>
-    </div>
-    <div id="objetoContainer" class="row mt-2">
-      <% cards.forEach(card => { %>
-        <div class="col-md mb-4 produto">
-          <div class="card animar-criacao">
-            <div class="card-body">
-              <h4 class="card-title"><%= card.titulo %></h4>
-              <h6 class="card-title my-3">Qtd: <%= card.quantidade %></h6>
-              <h6 class="card-title my-3">R$: <%= card.preco %></h6>
-              <h6 class="card-title mb-3">Categoria: <%= card.categoria %></h6>
-              <h6 class="card-title mb-3">Validade: <%= card.validade %></h6>
-              <h6 class="card-title my-3">Fornecedor: <%= card.fornecedor %></h6>
-              <h6 class="card-title mb-4">Criado em: <%= card.criadoEm %></h6>
-              <div class="d-flex align-contents-center">
-                <button class="btn btn-info atualizar mx-4">Atualizar</button>
-                <button class="btn btn-danger deletar">Apagar</button>
-              </div>
+    <div id="objetoContainer" class="row mt-2 justify-content-center">
+        <div class="col-md-3 mb-4 produto">
+            <div class="card animar-criacao text-center">
+                <div class="card-body">
+                    <h4 class="card-title"> Fazer logout</h4>
+                    <p class="card-text">Clique para sair da sua conta</p>
+                    <button class="btn btn-info atualizar">Sair</button>
+                </div>
             </div>
-          </div>
         </div>
-      <% });%>   
+        <div class="col-md-3 mb-4 produto">
+            <div class="card animar-criacao text-center">
+                <div class="card-body">
+                    <h4 class="card-title"> Editar perfil</h4>
+                    <p class="card-text">Clique aqui para editar seu nome, email ou senha</p>
+                    <button class="btn btn-warning atualizar">Entrar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4 produto">
+            <div class="card animar-criacao text-center">
+                <div class="card-body">
+                    <h4 class="card-title"> Criar estoque Post-It ou Planilha</h4>
+                    <p class="card-text">Clique para gerar um novo estoque para produtos</p>
+                    <form>
+                        <label class="form-label" for="nome">Nome do estoque</label>
+                        <input class="form-control" type="text" name="nome" id="">
+                    </form>
+                    <button class="btn btn-primary atualizar">Post-It</button>
+                    <button class="btn btn-success atualizar">Planilha</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4 produto">
+            <div class="card animar-criacao text-center">
+                <div class="card-body">
+                    <h4 class="card-title"> Ver estoque 2</h4>
+                    <p class="card-text">Clique aqui para ver os produtos desse estoque</p>
+                    <button class="btn btn-info atualizar">Entrar</button>
+                </div>
+            </div>
+        </div>
+       
     </div>
   </div>
 </main>
+
 
 <footer class="py-4 bg-dark border-top">
     <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
@@ -138,6 +118,8 @@
 <script src="/js/bootstrap.bundle.js"></script>
 <script src="/js/popper.min.js"></script>
 <script>
+
+
 document.getElementById('cardCreator').addEventListener('click', () => {
     const popup = document.getElementById('popup');
     popup.style.display = 'block'; // Mostra o popup
@@ -165,11 +147,7 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
 
     const formData = new FormData(event.target);
     const titulo = formData.get('nameProduct');
-    const quantidade = formData.get('qtdProduct');
-    const validade = formData.get('dateProduct');
-    const preco = formData.get('priceProduct');
     const categoria = formData.get('categoryProduct');
-    const fornecedor = formData.get('fornecedorProduct');
     const criadoEm = new Date().toLocaleDateString();
 
     const response = fetch('/api/appendCard',{
