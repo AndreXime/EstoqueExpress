@@ -9,7 +9,8 @@ router.get('/entrar', pController.getLoginRegister);
 router.post('/login', pController.login);
 router.post('/register',pController.register);
 
-router.get('/dashboard',dController.getDash)
+router.get('/dashboard',dController.getDash);
+router.post('/api/appendCard',dController.appendCard);
 
 
 module.exports = router;

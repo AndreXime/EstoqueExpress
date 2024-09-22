@@ -1,11 +1,19 @@
-const User = require('../models/userModel');
+const User = require('../models/models');
 
 // Os nomes estão bem autoexplicativos para precisar comentar algum...
+
+// throw {errors:xxxxx} são mais facil de manusear 
+// pois sao do msm formato que o validator
+
+const returnUserById = async (id) => {
+    const user = await User.findById(id);
+    return user;
+}
 
 const searchUser = async (userData) => {
     const user = await User.findOne(userData);
     if(!user)
-        throw new Error("Usuario não existe")
+        throw {errors:{conta:['Usuario não existe']}} 
 
     return user;
 };
@@ -18,7 +26,7 @@ const createUser = async (userData) => {
 const deleteUser = async (userData) => {
     const deletedUser = await User.findOneAndDelete(userData);
     if (!deletedUser)
-        throw new Error("Usuário não existe");
+        throw {errors:{conta:['Usuario não existe']}} 
 
     return deletedUser;
 };
@@ -26,7 +34,7 @@ const deleteUser = async (userData) => {
 const updateUser = async (currentUser, newUser) => {
     const updatedUser = await User.findOneAndUpdate(currentUser, newUser, { new: true ,runValidators: true });
     if (!updatedUser) {
-        throw new Error("Usuário não existe");
+        throw {errors:{conta:['Usuario não existe']}} 
     }
     return updatedUser;
 };
@@ -36,4 +44,5 @@ module.exports = {
     deleteUser,
     createUser,
     updateUser,
+    returnUserById,
 };

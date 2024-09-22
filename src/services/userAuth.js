@@ -1,4 +1,4 @@
-const uService = require('./microUserCrud');
+const uService = require('./userCrud');
 const { validate } = require('../middlewares/validator');
 
 const registerUser = async (req) => {
@@ -9,9 +9,10 @@ const registerUser = async (req) => {
         
         return await uService.createUser({ name, email, password});
     } catch (err) {
-        if(typeof(err) == Error)
-            throw new Error("Já existe uma conta com essas crendenciais");
-        throw err
+        if(err.errors){
+            throw err;
+        }
+        throw {errors:{contaR: ["Já existe uma conta com essas crendenciais"]}};
     }
 };
 const loginUser = async (req) => {
@@ -21,10 +22,8 @@ const loginUser = async (req) => {
         await validate({ email, password }, 'search') 
         
         return await uService.searchUser({ email, password});
-    } catch (err) {
-        if(typeof(err) == Error)
-            throw new Error("Nenhuma conta encontrada!");
-        throw err.errors
+    } catch (err){
+        throw {errors:{contaL:['Usuario não existe']}} 
     }
 };
 const deleteUser = async (req) => {
@@ -35,9 +34,7 @@ const deleteUser = async (req) => {
         
         return await uService.deleteUser({ email, password});
     } catch (err) {
-        if(typeof(err) == Error)
-            throw new Error("Nenhuma conta encontrada!");
-        throw err.errors
+        throw err;
     }
 };
 const updateUser = async (req) => {
@@ -49,9 +46,7 @@ const updateUser = async (req) => {
 
         return await uService.updateUser({ email: email, password: password },{ name: newname, email: newemail, password: newpassword });
     } catch (err) {
-        if(typeof(err) == Error)
-            throw new Error("Nenhuma conta encontrada!");
-        throw err.errors
+        throw err;
     }
 };
 

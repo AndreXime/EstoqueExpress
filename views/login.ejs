@@ -66,24 +66,23 @@
   
         <!-- 2 column grid layout -->
         <div class="row mb-4">
-          <div class="col-md-6 d-flex justify-content-center">
-            <!-- Checkbox -->
-            <div class="form-check mb-3 mb-md-0">
-              <input class="form-check-input" type="checkbox" name="remember" value="" id="loginCheck" checked />
-              <label class="form-check-label" for="loginCheck"> Lembrar de mim </label>
-            </div>
-          </div>
-  
-          <div class="col-md-6 d-flex justify-content-center">
+          
+          <div class="col-md d-flex justify-content-center">
             <!-- Simple link -->
             <a href="#!">Esqueceu a senha?</a>
           </div>
         </div>
   
         <!-- Submit button -->
-        <div class="text-center">
+        <div class="text-center mb-4">
           <button type="submit" class="btn btn-primary">Fazer login</button>
         </div>
+        <% if (resultado.contaL) { %>
+          <% resultado.contaL.forEach(function(conta) { %>
+            <div class="alert alert-danger mt-3" role="alert">
+              <%= conta %>
+            </div>
+        <% });} %>
       </form>
     </div>
     
@@ -112,20 +111,38 @@
           <label class="form-label" for="registerRepeatPassword">Senha novamente</label>
           <input type="password" id="registerRepeatPassword" name="password_confirmation" class="form-control" />
         </div>
-  
+        
         <!-- Submit button -->
-        <div class="text-center mt-5">
+        <div class="text-center mb-4">
           <button type="submit" class="btn btn-primary">Fazer cadastro</button>
         </div>
+        <% if (resultado.contaR) { %>
+          <% resultado.conta.forEach(function(conta) { %>
+            <div class="alert alert-danger mt-3" role="alert">
+              <%= conta %>
+            </div>
+        <% });} %>
+        <% if (resultado.email) { %>
+          <% resultado.email.forEach(function(email) { %>
+            <div class="alert alert-danger mt-3" role="alert">
+              <%= email %>
+            </div>
+        <% });} %>
+        <% if (resultado.password) { %>
+          <% resultado.conta.forEach(function(conta) { %>
+            <div class="alert alert-danger mt-3" role="alert">
+              <%= conta %>
+            </div>
+        <% });} %>
       </form>
     </div>
   </div>
 </main>
-<div id="carregamento"></div>
 
 <footer class="py-4 bg-dark border-top">
-        <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
+  <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
 </footer>
+<div id="carregamento"></div>
 <script src="/js/bootstrap.bundle.js"></script>
 <script>
   const preloader = document.querySelector('#carregamento');

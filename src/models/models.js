@@ -1,5 +1,15 @@
 const mongoose = require('mongoose');
 
+const produtoSchema = new mongoose.Schema({
+    titulo: { },
+    quantidade: { },
+    validade: { },
+    preco: { },
+    categoria: { },
+    fornecedor: { },
+    criadoEm: { }
+});
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,7 +27,8 @@ const userSchema = new mongoose.Schema({
     createDate: {
         type: Date,
         default: Date.now(),
-    }
+    },
+    produtos: [produtoSchema],
 });
 
 const User = mongoose.model('User', userSchema);

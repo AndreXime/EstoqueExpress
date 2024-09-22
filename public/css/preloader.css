@@ -1,13 +1,13 @@
-#preloader {
+#carregamento {
     position: fixed;
     inset: 0;
     z-index: 999999;
     overflow: hidden;
     background: #303030;
-    transition: all 0.6s ease-out;
+    transition: all 1s ease-out;
 }
   
-#preloader:before {
+#carregamento:before {
     content: "";
     position: fixed;
     top: calc(50% - 30px);
@@ -17,7 +17,7 @@
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: animate-preloader 1.5s linear infinite;
+    animation: animate-preloader 2s linear infinite;
 }
   
 @keyframes animate-preloader {
