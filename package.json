@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "copy-bootstrap": "del public\\css\\bootstrap.min.css && del public\\js\\bootstrap.bundle.min.js && xcopy /Y node_modules\\bootstrap\\dist\\css\\bootstrap.min.css public\\css && xcopy /Y node_modules\\bootstrap\\dist\\js\\bootstrap.bundle.min.js public\\js",
     "start": "node app.js"
   },
   "keywords": [],
