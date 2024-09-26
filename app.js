@@ -47,5 +47,5 @@ app.use('/', routes);
 // Inicializando servidor
 const port = process.env.PORT || 3000;
 app.listen(port,'0.0.0.0',() => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`\nServer running at http://localhost:${port}\n`);
 });
