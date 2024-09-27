@@ -1,4 +1,5 @@
 import userServ from "../services/userCrud.js";
+import estoqueServ from "../services/userProduct.js"
 
 const getHome = async (req,res) => {
     res.render('home');
@@ -16,26 +17,25 @@ const getLoginRegister = async (req,res) => {
     };
     res.render('login',{ resultado });
 }
-const getDash = async (req,res) =>{
-    const user = req.session.usuario;
-    if(!user){
-        res.redirect('entrar');
-    }else{
-        const refreshUser = await userServ.searchUserById(user._id);
-        req.session.usuario = refreshUser;
-        const cards = refreshUser.produtos || null;
-        res.render('dashboard',{cards});
-    }
-}
 const getMenu = async (req,res) => {
     const user = req.session.usuario;
     if(!user){
         res.redirect('entrar');
     }else{
-        const refreshUser = await userServ.searchUserById(user._id);
-        req.session.usuario = refreshUser;
-        const cards = refreshUser.estoque || null;
-        res.render('menu',{ cards });
+        const estoques = await estoqueServ.searchUserEstoques(user._id) || null
+
+        res.render('menu',{ estoques });
+    }
+}
+const getDash = async (req,res) =>{
+    const user = req.session.usuario;
+    if(!user){
+        res.redirect('entrar');
+    }else{
+        const estoques = await estoqueServ.searchOneEstoque(user._id) || null
+        const produtos = estoques.produtos;
+
+        res.render('dashboard',{ produtos });
     }
 }
 

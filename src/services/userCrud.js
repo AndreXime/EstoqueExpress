@@ -1,4 +1,4 @@
-import User from '../models/models.js';
+import {User} from '../models/models.js';
 
 // Os nomes estão bem autoexplicativos para precisar comentar algum...
 

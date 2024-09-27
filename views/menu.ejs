@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -29,9 +30,10 @@
 
         .popup {
           position: fixed;
+          display: none;
           top: 20px;
           right: 20px;
-          background-color: #4CAF50; /* Verde */
+          background-color: #78a179;
           color: white;
           padding: 15px;
           border-radius: 5px;
@@ -69,6 +71,7 @@
 <main class="container flex-grow-1 my-4">
   <div class="container">
     <div id="objetoContainer" class="row justify-content-center">  
+        <p class="popup" id="popupSucesso"></p>
         <div class="col-md-5 mb-4 produto">
             <div class="card animar-criacao text-center">
               <div class="card-body">
@@ -86,23 +89,22 @@
         <div class="col-md-6 mb-4 produto">
             <div class="card animar-criacao text-center">
                 <div class="card-body">
-                    <h4 class="card-title"> Criar estoque Post-It ou Planilha</h4>
+                    <h4 class="card-title"> Crie seu estoque</h4>
                     <p class="card-text">Clique para gerar um novo estoque para produtos</p>
-                    <form>
+                    <form id="criarEstoque">
                         <label class="form-label" for="nome">Nome do estoque</label>
-                        <input class="form-control" type="text" name="nome" id="">
+                        <input class="form-control" required type="text" name="titulo">
+                        <button type="submit" class="btn btn-primary mt-4">Criar estoque</button>
                     </form>
-                    <button class="btn btn-primary atualizar">Post-It</button>
-                    <button class="btn btn-success atualizar">Planilha</button>
                 </div>
             </div>
         </div>
-        <% if (cards) { %>
-          <% cards.forEach(function(nome){ %>
+        <% if (estoques) { %>
+          <% estoques.forEach(function(nome){ %>
             <div class="col-md-5 mb-4 produto">
             <div class="card animar-criacao text-center">
               <div class="card-body">
-                  <h4 class="card-title"> <%= nome %> </h4>
+                  <h4 class="card-title"> <%= nome.titulo %> </h4>
                   <p class="card-text">Acesse seu estoque aqui</p>
                   <button class="btn btn-warning atualizar">Entrar</button>
               </div>
@@ -120,10 +122,14 @@
 <script src="/js/bootstrap.bundle.js"></script>
 <script src="/js/popper.min.js"></script>
 <script>
-
-
-document.getElementById('cardCreator').addEventListener('click', () => {
+function popupballon(bool){
     const popup = document.getElementById('popup');
+    
+    if(bool){
+      popup.innerHTML = "Sucesso";
+    }else{
+      popup.innerHTML = "Algo ocorreu";
+    }
     popup.style.display = 'block'; // Mostra o popup
 
     // Esconde o popup após 3 segundos
@@ -133,8 +139,8 @@ document.getElementById('cardCreator').addEventListener('click', () => {
             popup.style.display = 'none'; // Remove do DOM após a animação
             popup.style.opacity = '1'; // Reseta a opacidade para a próxima vez
         }, 500); // Espera o tempo da animação
-    }, 3000); // Tempo que o popup ficará visível
-});
+    }, 3000);
+};
 
 const preloader = document.querySelector('#carregamento');
 if (preloader) {
@@ -144,40 +150,34 @@ if (preloader) {
   });
 }
 
-document.getElementById ('cardCreator').addEventListener('submit', function(event) {
+document.getElementById ('criarEstoque').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const titulo = formData.get('nameProduct');
-    const categoria = formData.get('categoryProduct');
-    const criadoEm = new Date().toLocaleDateString();
+    const titulo = formData.get('titulo');
 
-    const response = fetch('/api/appendCard',{
+    const response = fetch('/api/addEstoque',{
       method: 'Post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        titulo, quantidade, validade,
-        preco,categoria,fornecedor,criadoEm
+        titulo
       })
     });
-
-    console.log(response.ok);
+    if(!response){
+      popupballon(false);
+      return;
+    }
+    popupballon(true);
 
     // Cria o elemento a ser animado
     const card = document.createElement('div');
-    card.classList.add('col-md', 'mb-4', 'produto'); // Adiciona classe para coluna e margem
+    card.classList.add('col-md-3', 'mb-4', 'produto'); // Adiciona classe para coluna e margem
     card.innerHTML = `
       <div class="card animar-criacao">
         <div class="card-body">
           <h4 class="card-title">${titulo}</h4>
-          <h6 class="card-title my-3">Qtd: ${quantidade}</h6>
-          <h6 class="card-title my-3">R$: ${preco}</h6>
-          <h6 class="card-title mb-3">Categoria: ${categoria}</h6>
-          <h6 class="card-title mb-3">Validade: ${validade}</h6>
-          <h6 class="card-title my-3">Fornecedor: ${fornecedor}</h6>
-          <h6 class="card-title mb-4">Criado em: ${criadoEm}</h6>
           <div class="d-flex align-contents-center">
-            <button class="btn btn-info atualizar mx-4">Atualizar</button>
+            <button class="btn btn-info atualizar mx-4">Entrar</button>
             <button class="btn btn-danger deletar">Apagar</button>
           </div>
         </div>

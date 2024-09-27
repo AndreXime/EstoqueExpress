@@ -11,6 +11,7 @@ const produtoSchema = new Schema({
 });
 
 const estoqueSchema = new Schema({
+    userOwner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     titulo: { },
     produtosEstoque: [produtoSchema]
 });
@@ -33,9 +34,9 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now(),
     },
-    estoque: [estoqueSchema],
+    estoque: [{ type: Schema.Types.ObjectId, ref: 'Estoque' }]
 });
 
-const User = model('User', userSchema);
+export const User = model('User', userSchema);
+export const Estoque = model('Estoque', estoqueSchema);
 
-export default User;

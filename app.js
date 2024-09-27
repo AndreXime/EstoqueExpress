@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './src/routes/allRoutes.js';
+import routes from './src/routes/routes.js';
 import session from 'express-session';
 import './src/config/db.js'; // Conecta ao BD
 import { config } from 'dotenv';
