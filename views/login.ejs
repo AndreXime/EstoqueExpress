@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EverythingAtOnce - Acessar conta</title>
+    <title>Acessar conta</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/preloader.css">
+    <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
       @media (max-width: 991.98px) {
       .largura { width: 100%;}
@@ -15,7 +16,7 @@
       }
     </style>
 </head>
-<body style="display: none;" class="d-flex flex-column bg-dark text-light">
+<body style="display: none; background-image: url(/img/leaves.webp);" class="d-flex flex-column text-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid px-5 d-flex align-items-center">
         <div class="d-flex align-items-center">
@@ -51,7 +52,7 @@
   <!-- Pills content -->
   <div class="tab-content">
     <div class="tab-pane show active" id="pills-login">
-      <form action="/login" method="POST">
+      <form action="/api/login" method="POST">
         <!-- Email input -->
         <div class="form-outline mb-4">
           <label class="form-label" for="loginName">Email</label>
@@ -87,7 +88,7 @@
     </div>
     
     <div class="tab-pane" id="pills-register">
-      <form action="/register" method="POST">
+      <form action="/api/register" method="POST">
         <!-- Name input -->
         <div class="form-outline mb-4">
           <label class="form-label" for="registerName">Nome</label>
@@ -117,7 +118,7 @@
           <button type="submit" class="btn btn-primary">Fazer cadastro</button>
         </div>
         <% if (resultado.contaR) { %>
-          <% resultado.conta.forEach(function(conta) { %>
+          <% resultado.contaR.forEach(function(conta) { %>
             <div class="alert alert-danger mt-3" role="alert">
               <%= conta %>
             </div>
@@ -129,9 +130,9 @@
             </div>
         <% });} %>
         <% if (resultado.password) { %>
-          <% resultado.conta.forEach(function(conta) { %>
+          <% resultado.password.forEach(function(passwd) { %>
             <div class="alert alert-danger mt-3" role="alert">
-              <%= conta %>
+              <%= passwd %>
             </div>
         <% });} %>
       </form>

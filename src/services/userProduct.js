@@ -1,10 +1,15 @@
-const User = require('../models/models');
-const appendProduct = async (userId,produto) => {
+import User from '../models/models.js';
+
+const appendProduto = async (userId,produto) => {
     const user = await User.findById(userId);
-    await user.produtos.push(produto);
+    await user.estoque.produtos.push(produto);
     return await user.save();
 };
+const appendEstoque = async (userId,estoque) => {
 
-module.exports = {
-    appendProduct,
+}
+
+export default {
+    appendProduto,
+    appendEstoque
 }

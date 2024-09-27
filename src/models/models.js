@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const produtoSchema = new mongoose.Schema({
+const produtoSchema = new Schema({
     titulo: { },
     quantidade: { },
     validade: { },
@@ -10,7 +10,12 @@ const produtoSchema = new mongoose.Schema({
     criadoEm: { }
 });
 
-const userSchema = new mongoose.Schema({
+const estoqueSchema = new Schema({
+    titulo: { },
+    produtosEstoque: [produtoSchema]
+});
+
+const userSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -28,9 +33,9 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
-    produtos: [produtoSchema],
+    estoque: [estoqueSchema],
 });
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
-module.exports = User;
+export default User;

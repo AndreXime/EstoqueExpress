@@ -1,5 +1,5 @@
-const uService = require('./userCrud');
-const { validate } = require('../middlewares/validator');
+import uService from './userCrud.js';
+import {validate} from '../middlewares/validator.js';
 
 const registerUser = async (req) => {
     try{
@@ -51,7 +51,7 @@ const updateUser = async (req) => {
 };
 
 
-module.exports = {
+export default {
     registerUser,
     loginUser,
     deleteUser,

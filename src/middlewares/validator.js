@@ -1,4 +1,4 @@
-const Validator = require('validatorjs');
+import Validator from 'validatorjs';
 
 const rules = {
     register: {
@@ -13,12 +13,10 @@ const rules = {
     },
 };
 
-const validate = async (data, type) => {
+export const validate = async (data, type) => {
     const validator = new Validator(data, rules[type]);
     if (validator.fails()){
         throw {errors: validator.errors.all()}; // Lançando os erros
     }
     return true
 };
-
-module.exports = { validate };

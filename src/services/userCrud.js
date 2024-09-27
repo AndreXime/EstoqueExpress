@@ -1,11 +1,11 @@
-const User = require('../models/models');
+import User from '../models/models.js';
 
 // Os nomes estão bem autoexplicativos para precisar comentar algum...
 
 // throw {errors:xxxxx} são mais facil de manusear 
 // pois sao do msm formato que o validator
 
-const returnUserById = async (id) => {
+const searchUserById = async (id) => {
     const user = await User.findById(id);
     return user;
 }
@@ -39,10 +39,10 @@ const updateUser = async (currentUser, newUser) => {
     return updatedUser;
 };
 
-module.exports = {
+export default {
     searchUser,
+    searchUserById,
     deleteUser,
     createUser,
-    updateUser,
-    returnUserById,
+    updateUser
 };

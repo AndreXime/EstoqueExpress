@@ -1,9 +1,10 @@
-const express = require('express');
-const routes = require('./src/routes/allRoutes');
-const session = require('express-session')
-require('dotenv').config();  // Carrega variáveis do .env
-require('./src/config/db'); // Conecta ao BD
+import express from 'express';
+import routes from './src/routes/allRoutes.js';
+import session from 'express-session';
+import './src/config/db.js'; // Conecta ao BD
+import { config } from 'dotenv';
 
+config();  // Carrega variáveis do .env
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -22,7 +23,7 @@ app.use(session({
   cookie: { 
     secure: false,
     maxAge: null
-  }       // O cookie só será enviado em conexões HTTPS se secure for true
+  }
 }));
 
 

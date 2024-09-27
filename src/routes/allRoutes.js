@@ -1,17 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const pController = require('../controllers/homeController');
-const dController = require('../controllers/dashboardController')
+import { Router } from 'express';
+const router = Router();
+import render from '../controllers/Render_Controller.js';
+import api from '../controllers/API_Controller.js';
 
-router.get('/', pController.getHome);
-router.get('/entrar', pController.getLoginRegister);
+router.get('/', render.getHome);
+router.get('/entrar', render.getLoginRegister);
+router.get('/menu',render.getMenu);
+router.get('/dashboard',render.getDash);
 
-router.post('/login', pController.login);
-router.post('/register',pController.register);
-
-router.get('/menu',dController.getMenu);
-router.get('/dashboard',dController.getDash);
-router.post('/api/appendCard',dController.appendCard);
+router.post('/api/login', api.login);
+router.post('/api/register',api.register);
+router.post('/api/appendCard',api.appendProduct);
 
 
-module.exports = router;
+export default router;
