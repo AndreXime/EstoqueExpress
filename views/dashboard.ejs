@@ -47,7 +47,7 @@
     <div class="container-fluid px-5 d-flex align-items-center">
         <div class="d-flex align-items-center">
             <a class="navbar-brand" href="#!">
-                <img class="img-fluid" src="/img/logo.png" style="width: 300px;">
+                <img class="img-fluid" src="/img/logo.svg" style="width: 300px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,10 +55,9 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto m-2 mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active borda" aria-current="page" href="#!">Home</a></li>
-                <li class="nav-item"><a class="nav-link borda" href="#!">About</a></li>
-                <li class="nav-item"><a class="nav-link borda" href="#!">Contact</a></li>
-                <li class="nav-item"><a class="nav-link borda bordadown" href="#!">Services</a></li>
+                <li class="nav-item"><a class="nav-link active borda" aria-current="page" href="/">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link borda" href="/entrar">Login</a></li>
+                <li class="nav-item"><a class="nav-link borda bordadown" href="/sobrenos">Sobre nós</a></li>
             </ul>
         </div>
     </div>
@@ -99,6 +98,7 @@
                       <input id="fornecedorProduct" class="form-control" type="text" name="fornecedorProduct">
                     </div>
                   </div>
+                  <p style="display: none;" id="id"><%= id %></p>
                   <input class="btn btn-primary" id="criarObjeto" type="submit" value="Criar objeto">
                 </form>
               </div>
@@ -110,22 +110,33 @@
     </div>
     <div id="objetoContainer" class="row mt-2">
       <% produtos.forEach(card => { %>
-        <div class="col-md mb-4 produto">
+        <div class="col-md-3 mb-4 produto">
           <div class="card animar-criacao">
             <div class="card-body">
-              <h4 class="card-title"><%= card.titulo %></h4>
-              <h6 class="card-title my-3">Qtd: <%= card.quantidade %></h6>
-              <h6 class="card-title my-3">R$: <%= card.preco %></h6>
-              <h6 class="card-title mb-3">Categoria: <%= card.categoria %></h6>
-              <h6 class="card-title mb-3">Validade: <%= card.validade %></h6>
-              <h6 class="card-title my-3">Fornecedor: <%= card.fornecedor %></h6>
-              <h6 class="card-title mb-4">Criado em: <%= card.criadoEm %></h6>
-              <div class="d-flex align-contents-center">
-                <button class="btn btn-info atualizar mx-4">Atualizar</button>
-                <button class="btn btn-danger deletar">Apagar</button>
+              <h4 class="card-title text-center"><%= card.titulo %></h4>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                      <div class="col-6">
+                        <h6 class="card-title mb-3">R$: <%= card.preco %></h6>
+                      </div>
+                      <div class="col-6">
+                        <h6 class="card-title mb-3">Qtd: <%= card.quantidade %></h6>
+                      </div>
+                    </div>
+                    <h6 class="card-title mb-3">Validade: <%= card.validade %></h6>
+                    <h6 class="card-title mb-3">Categoria: <%= card.categoria %></h6>
+                    <h6 class="card-title mb-3">Fornecedor: <%= card.fornecedor %></h6>
+                    <h6 class="card-title mb-3">Criado em: <%= card.criadoEm %></h6>
+                  </div>
+                  <div class="col-md-12 botoes d-flex justify-content-between">
+                      <p style="display:none" id="idProduto"> <%= card._id %> </p>
+                      <button class="btn btn-info atualizar">Atualizar</button>
+                      <button class="btn btn-danger deletar">Apagar</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       <% });%>   
     </div>
@@ -133,12 +144,12 @@
 </main>
 
 <footer class="py-4 bg-dark border-top">
-    <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
+    <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EstoqueExpress 2024</p></div>
 </footer>
 <script src="/js/bootstrap.bundle.js"></script>
 <script src="/js/popper.min.js"></script>
 <script>
-document.getElementById('cardCreator').addEventListener('click', () => {
+document.getElementById('cardCreator').addEventListener('submit', () => {
     const popup = document.getElementById('popup');
     popup.style.display = 'block'; // Mostra o popup
 
@@ -156,9 +167,9 @@ const preloader = document.querySelector('#carregamento');
 if (preloader) {
   window.addEventListener('DOMContentLoaded', () => {
     preloader.remove();
-    atualizar();
   });
 }
+atualizar();
 
 document.getElementById ('cardCreator').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -171,8 +182,9 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
     const categoria = formData.get('categoryProduct');
     const fornecedor = formData.get('fornecedorProduct');
     const criadoEm = new Date().toLocaleDateString();
+    const id = document.getElementById('id').innerText.trim();
 
-    const response = fetch('/api/appendCard',{
+    const response = fetch(`/api/addProduto?id=${id}`,{
       method: 'Post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -181,23 +193,31 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
       })
     });
 
-    console.log(response.ok);
-
     // Cria o elemento a ser animado
     const card = document.createElement('div');
-    card.classList.add('col-md', 'mb-4', 'produto'); // Adiciona classe para coluna e margem
+    card.classList.add('col-md-3', 'mb-4', 'produto');
     card.innerHTML = `
       <div class="card animar-criacao">
         <div class="card-body">
-          <h4 class="card-title">${titulo}</h4>
-          <h6 class="card-title my-3">Qtd: ${quantidade}</h6>
-          <h6 class="card-title my-3">R$: ${preco}</h6>
-          <h6 class="card-title mb-3">Categoria: ${categoria}</h6>
-          <h6 class="card-title mb-3">Validade: ${validade}</h6>
-          <h6 class="card-title my-3">Fornecedor: ${fornecedor}</h6>
-          <h6 class="card-title mb-4">Criado em: ${criadoEm}</h6>
-          <div class="d-flex align-contents-center">
-            <button class="btn btn-info atualizar mx-4">Atualizar</button>
+          <h4 class="card-title text-center">${titulo}</h4>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-6">
+                    <h6 class="card-title mb-3">R$:${preco}</h6>
+                </div>
+                  <div class="col-6">
+                    <h6 class="card-title mb-3">Qtd:${quantidade}</h6>
+                  </div>
+                </div>
+                <h6 class="card-title mb-3">Validade:${validade} </h6>
+                <h6 class="card-title mb-3">Categoria:${categoria} </h6>
+                <h6 class="card-title mb-3">Fornecedor:${fornecedor} </h6>
+                <h6 class="card-title mb-3">Criado em:${criadoEm} </h6>
+              </div>
+          <div class="col-md-12 botoes d-flex justify-content-between">
+            <p style="display:none" id="idProduto">${response}</p>
+            <button class="btn btn-info atualizar">Atualizar</button>
             <button class="btn btn-danger deletar">Apagar</button>
           </div>
         </div>
@@ -220,9 +240,16 @@ function atualizar(){
   const botoes = document.querySelectorAll('.deletar');
   botoes.forEach(function(botao) {
       botao.addEventListener('click', function() {
-        // Subir na hierarquia até encontrar o card mais próximo
+        const id = document.getElementById('id').innerText.trim();
+        const closest = botao.closest('.botoes');
+        const idproduto = closest.querySelector('#idProduto').textContent.trim();
+
+        const response = fetch(`/api/removeProduto?id=${id}&idproduto=${idproduto}`,{
+          method: 'Post',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
         const card = botao.closest('.produto');
-        // Remove o card correspondente
         card.remove();
       });
   });

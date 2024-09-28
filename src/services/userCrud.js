@@ -31,8 +31,8 @@ const deleteUser = async (userData) => {
     return deletedUser;
 };
 
-const updateUser = async (currentUser, newUser) => {
-    const updatedUser = await User.findOneAndUpdate(currentUser, newUser, { new: true ,runValidators: true });
+const updateUser = async (userId, newUser) => {
+    const updatedUser = await User.findByIdAndUpdate(userId, newUser)
     if (!updatedUser) {
         throw {errors:{conta:['Usuario não existe']}} 
     }

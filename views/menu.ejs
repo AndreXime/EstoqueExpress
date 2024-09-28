@@ -51,7 +51,7 @@
     <div class="container-fluid px-5 d-flex align-items-center">
         <div class="d-flex align-items-center">
             <a class="navbar-brand" href="#!">
-                <img class="img-fluid" src="/img/logo.png" style="width: 300px;">
+                <img class="img-fluid" src="/img/logo.svg" style="width: 300px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -59,10 +59,9 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto m-2 mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active borda" aria-current="page" href="#!">Home</a></li>
-                <li class="nav-item"><a class="nav-link borda" href="#!">About</a></li>
-                <li class="nav-item"><a class="nav-link borda" href="#!">Contact</a></li>
-                <li class="nav-item"><a class="nav-link borda bordadown" href="#!">Services</a></li>
+                <li class="nav-item"><a class="nav-link active borda" aria-current="page" href="/">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link borda" href="/entrar">Login</a></li>
+                <li class="nav-item"><a class="nav-link borda bordadown" href="/sobrenos">Sobre nós</a></li>
             </ul>
         </div>
     </div>
@@ -71,53 +70,55 @@
 <main class="container flex-grow-1 my-4">
   <div class="container">
     <div id="objetoContainer" class="row justify-content-center">  
-        <p class="popup" id="popupSucesso"></p>
-        <div class="col-md-5 mb-4 produto">
-            <div class="card animar-criacao text-center">
-              <div class="card-body">
-                  <h4 class="card-title"> Editar perfil</h4>
-                  <p class="card-text">Clique aqui para editar seu nome, email ou senha</p>
-                  <button class="btn btn-warning atualizar">Editar</button>
-              </div>
-              <div class="card-body">
-                  <h4 class="card-title"> Fazer logout</h4>
-                  <p class="card-text">Clique para sair da sua conta</p>
-                  <button class="btn btn-info atualizar">Sair</button>
-              </div>
-            </div>
+      <div class="col-md-5 mb-4 produto">
+        <div class="card animar-criacao text-center">
+          <div class="card-body">
+            <h4 class="card-title"> Editar perfil</h4>
+            <p class="card-text">Clique aqui para editar seu nome, email ou senha</p>
+            <button class="btn btn-warning atualizar">Editar</button>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title"> Fazer logout</h4>
+            <p class="card-text">Clique para sair da sua conta</p>
+            <button class="btn btn-info atualizar">Sair</button>
+          </div>
         </div>
-        <div class="col-md-6 mb-4 produto">
-            <div class="card animar-criacao text-center">
-                <div class="card-body">
-                    <h4 class="card-title"> Crie seu estoque</h4>
-                    <p class="card-text">Clique para gerar um novo estoque para produtos</p>
-                    <form id="criarEstoque">
-                        <label class="form-label" for="nome">Nome do estoque</label>
-                        <input class="form-control" required type="text" name="titulo">
-                        <button type="submit" class="btn btn-primary mt-4">Criar estoque</button>
-                    </form>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6 mb-4 produto">
+        <div class="card animar-criacao text-center">
+          <div class="card-body">
+            <h4 class="card-title"> Crie seu estoque</h4>
+            <p class="card-text">Clique para gerar um novo estoque para produtos</p>
+            <form id="criarEstoque">
+              <label class="form-label" for="nome">Nome do estoque</label>
+              <input class="form-control" required type="text" name="titulo">
+              <button type="submit" class="btn btn-primary mt-4">Criar estoque</button>
+              <div class="popup" id="popup"></div>
+            </form>
+          </div>
         </div>
-        <% if (estoques) { %>
-          <% estoques.forEach(function(nome){ %>
-            <div class="col-md-5 mb-4 produto">
-            <div class="card animar-criacao text-center">
-              <div class="card-body">
-                  <h4 class="card-title"> <%= nome.titulo %> </h4>
-                  <p class="card-text">Acesse seu estoque aqui</p>
-                  <button class="btn btn-warning atualizar">Entrar</button>
-              </div>
+      </div>
+      <% if (estoques) { %>
+        <% estoques.forEach(function(nome){ %>
+          <div class="col-md-3 mb-4 produto">
+          <div class="card animar-criacao text-center">
+            <div class="card-body">
+                <h4 class="card-title"> <%= nome.titulo %> </h4>
+                <p style="display: none;" id="id"> <%= nome._id %> </p>
+                <p class="card-text">Acesse seu estoque aqui</p>  
+                <button class="btn btn-success tabela">Entrar</button>
+                <button class="btn btn-danger remover">Remover</button>
             </div>
-            </div>
-        <% })}; %>
+          </div>
+          </div>
+      <% })}; %>
     </div>
   </div>
 </main>
 
 
 <footer class="py-4 bg-dark">
-    <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EverythingAtOnce 2024</p></div>
+    <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EstoqueExpress 2024</p></div>
 </footer>
 <script src="/js/bootstrap.bundle.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -139,16 +140,16 @@ function popupballon(bool){
             popup.style.display = 'none'; // Remove do DOM após a animação
             popup.style.opacity = '1'; // Reseta a opacidade para a próxima vez
         }, 500); // Espera o tempo da animação
-    }, 3000);
+    }, 5000);
 };
 
 const preloader = document.querySelector('#carregamento');
 if (preloader) {
   window.addEventListener('DOMContentLoaded', () => {
     preloader.remove();
-    atualizar();
   });
 }
+atualizar();
 
 document.getElementById ('criarEstoque').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -174,12 +175,12 @@ document.getElementById ('criarEstoque').addEventListener('submit', function(eve
     card.classList.add('col-md-3', 'mb-4', 'produto'); // Adiciona classe para coluna e margem
     card.innerHTML = `
       <div class="card animar-criacao">
-        <div class="card-body">
-          <h4 class="card-title">${titulo}</h4>
-          <div class="d-flex align-contents-center">
-            <button class="btn btn-info atualizar mx-4">Entrar</button>
-            <button class="btn btn-danger deletar">Apagar</button>
-          </div>
+        <div class="card-body text-center">
+          <h4 class="card-title"> ${titulo} </h4>
+          <p style="display: none;" id="id">${response}<p>
+          <p class="card-text">Acesse seu estoque aqui</p>  
+          <button class="btn btn-success tabela">Entrar</button>
+          <button class="btn btn-danger remover">Remover</button>
         </div>
       </div>
     `;
@@ -197,12 +198,30 @@ function validateNumber(input) {
 }
 
 function atualizar(){
-  const botoes = document.querySelectorAll('.deletar');
-  botoes.forEach(function(botao) {
+  const botoesNext = document.querySelectorAll('.tabela');
+  const botoesRemove = document.querySelectorAll('.remover');
+
+  botoesNext.forEach(function(botao) {
       botao.addEventListener('click', function() {
-        // Subir na hierarquia até encontrar o card mais próximo
+
+        // Subir na hierarquia até encontrar o div pai
+        const cardbody = botao.closest('.card-body');
+        const id = cardbody.querySelector('#id').textContent.trim();
+
+        window.location.href = `dashboard?id=${id}`;
+      });
+  });
+  botoesRemove.forEach(function(botao) {
+      botao.addEventListener('click', function() {
+        const cardbody = botao.closest('.card-body');
+        const id = cardbody.querySelector('#id').textContent.trim();
+        fetch(`/api/removeEstoque?id=${id}`,{
+          method: 'Post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ })
+        });
+        
         const card = botao.closest('.produto');
-        // Remove o card correspondente
         card.remove();
       });
   });

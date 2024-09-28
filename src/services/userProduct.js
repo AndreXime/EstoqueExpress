@@ -1,19 +1,18 @@
 import {Estoque,User} from '../models/models.js';
+import { Types } from 'mongoose';
 
 const createEstoque = async (userId,titulo) => {
     const estoque = new Estoque({userOwner:userId,titulo:titulo});
     await estoque.save();
 
-    const user = await User.findById(userId);
-    user.estoque.push(estoque._id);
-    await user.save();
-
-    return estoque; 
+    return estoque._id; 
 };
-const createProduto = async (userId,estoqueName,produto) => {
-    const estoque = await estoque.findOne({userOwner:userId,titulo:estoqueName});
-
-    estoque.produtos.push(produto);
+const createProduto = async (id,produto) => {
+    const estoque = await Estoque.findById( Types.ObjectId.createFromHexString(id) );
+    if(!estoque){
+        throw new Error;
+    }
+    estoque.produtosEstoque.push(produto);
     return estoque.save();
 }
 const searchUserEstoques = async (UserId) => {
@@ -23,18 +22,36 @@ const searchUserEstoques = async (UserId) => {
     }
     return estoque;
 }
-const searchOneEstoque = async (UserId,titulo) => {
-    const estoque = await Estoque.findOne({userOwner:UserId,titulo:titulo});
+const searchOneEstoque = async (id) => {
+    const estoque = await Estoque.findById( Types.ObjectId.createFromHexString(id));
     if(!estoque){
         throw new Error;
     }
     return estoque;
 }
+const removeEstoque = async(id) => {
+    const estoque = await Estoque.findByIdAndDelete( Types.ObjectId.createFromHexString(id));
+    if(!estoque){
+        throw new Error;
+    }
+    return estoque;
+}
+const removeProduto = async(estoqueId,id) => {
+    const resultado = await Estoque.findByIdAndUpdate(
+        estoqueId, 
+        { $pull: { produtosEstoque: { _id: id } } }, // Remove o produto com o _id fornecido
+        { new: true } // Retorna o documento atualizado
+    );
+    return resultado;
+}
+
 
 
 export default {
     createProduto,
     createEstoque,
     searchUserEstoques,
-    searchOneEstoque
+    searchOneEstoque,
+    removeEstoque,
+    removeProduto
 }
