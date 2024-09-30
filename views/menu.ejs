@@ -66,6 +66,7 @@
         </div>
     </div>
 </nav>
+<div id="carregamento"></div>
 
 <main class="container flex-grow-1 my-4">
   <div class="container">
@@ -75,12 +76,12 @@
           <div class="card-body">
             <h4 class="card-title"> Editar perfil</h4>
             <p class="card-text">Clique aqui para editar seu nome, email ou senha</p>
-            <button class="btn btn-warning atualizar">Editar</button>
+            <a href="/atualizarConta" class="btn btn-warning atualizar">Editar</a>
           </div>
           <div class="card-body">
             <h4 class="card-title"> Fazer logout</h4>
             <p class="card-text">Clique para sair da sua conta</p>
-            <button class="btn btn-info atualizar">Sair</button>
+            <a href="/api/logout" class="btn btn-info atualizar">Sair</a>
           </div>
         </div>
       </div>
@@ -115,7 +116,6 @@
     </div>
   </div>
 </main>
-
 
 <footer class="py-4 bg-dark">
     <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EstoqueExpress 2024</p></div>

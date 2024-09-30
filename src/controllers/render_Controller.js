@@ -24,7 +24,8 @@ const getUpdate = async (req,res) =>{
     if(!user){
         res.redirect('entrar');
     }else{
-        res.render("update");
+        const estoques = await estoqueServ.searchUserEstoques(user._id) || null
+        res.render("update",{user, estoques});
     }
 }
 const getMenu = async (req,res) => {
