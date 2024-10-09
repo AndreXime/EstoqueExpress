@@ -1,4 +1,5 @@
-import estoqueServ from "../services/userProduct.js"
+import estoqueServ from "../services/userProduct.js";
+import userCrud from "../services/userCrud.js";
 
 const getHome = async (req,res) => {
     res.render('home');
@@ -24,8 +25,9 @@ const getUpdate = async (req,res) =>{
     if(!user){
         res.redirect('entrar');
     }else{
-        const estoques = await estoqueServ.searchUserEstoques(user._id) || null
-        res.render("update",{user, estoques});
+        const estoques = await estoqueServ.searchUserEstoques(user._id) || null;
+        const refreshUser = await userCrud.searchUserById(user._id);
+        res.render("update",{refreshUser, estoques});
     }
 }
 const getMenu = async (req,res) => {

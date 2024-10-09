@@ -37,7 +37,7 @@ const deleteUser = async (req) => {
         throw err;
     }
 };
-const updateUser = async (req) => {
+/*const updateUser = async (req) => {
     try{
         const { email, password, newname, newemail, newpassword, newpassword_confirmation } = req;
 
@@ -49,11 +49,11 @@ const updateUser = async (req) => {
         throw err;
     }
 };
-
+*/
 
 export default {
     registerUser,
     loginUser,
     deleteUser,
-    updateUser
+    //updateUser
 };
