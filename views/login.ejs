@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,25 +20,7 @@
     </style>
 </head>
 <body style="display: none; background-image: url(/img/dot.webp);" class="d-flex flex-column">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid px-5 d-flex align-items-center">
-        <div class="d-flex align-items-center">
-            <a class="navbar-brand" href="/">
-                <img class="img-fluid" src="/img/logo.svg" style="width: 300px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto m-2 mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active borda" aria-current="page" href="/">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link borda" href="/entrar">Login</a></li>
-                <li class="nav-item"><a class="nav-link borda bordadown" href="/sobrenos">Sobre nós</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<%- include('partials/nav') %>
 
 <main style="background-color: #faf9fa;" class="container larguradesktop largura p-5 my-4 flex-grow-1">
    <!-- Pills navs -->
@@ -142,9 +124,8 @@
   </div>
 </main>
 
-<footer class="py-4 bg-dark border-top">
-  <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; EstoqueExpress 2024</p></div>
-</footer>
+<%- include('partials/footer') %>
+
 <div id="carregamento"></div>
 <script src="/js/bootstrap.bundle.js"></script>
 <script>
