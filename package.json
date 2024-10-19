@@ -1,5 +1,5 @@
 {
-  "name": "servernode",
+  "name": "estoque-express",
   "version": "1.9.0",
   "main": "app.js",
   "scripts": {

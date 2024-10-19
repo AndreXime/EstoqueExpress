@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu principal</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/preloader.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
         /* Animação para os card aparecer suavemente */
@@ -46,10 +45,9 @@
 
     </style>
 </head>
-<body style="display: none; background-image: url(/img/dot.webp);" class="d-flex flex-column">
-  <%- include('partials/nav') %>
-
-<div id="carregamento"></div>
+<body style="background-image: url(/img/dot.webp);" class="d-flex flex-column">
+  
+<%- include('partials/nav') %>
 
 <main class="container flex-grow-1 my-4">
   <div class="container">
@@ -125,12 +123,6 @@ function popupballon(bool){
     }, 5000);
 };
 
-const preloader = document.querySelector('#carregamento');
-if (preloader) {
-  window.addEventListener('DOMContentLoaded', () => {
-    preloader.remove();
-  });
-}
 atualizar();
 
 document.getElementById ('criarEstoque').addEventListener('submit', function(event) {

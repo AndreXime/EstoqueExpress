@@ -6,7 +6,6 @@
     <title>EstoqueExpress</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/icons/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/img/preloader.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
     @media (max-width: 991.98px) {
@@ -20,7 +19,7 @@
     <%- include('partials/nav') %>
     
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header style="padding-top: 20px; padding-bottom: 20px;" class="bg-dark">
         <div class="container px-5">
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
@@ -138,15 +137,9 @@
     <!-- Footer-->
     <%- include('partials/footer') %>
 
-    <div id="carregamento"></div>
     <script src="/js/bootstrap.bundle.js"></script>
     <script>
-        const preloader = document.querySelector('#carregamento');
-        if (preloader) {
-            window.addEventListener('DOMContentLoaded', () => {
-                preloader.remove();
-            });
-        }
+    console.log("carregou")
         
     </script>
 </body>

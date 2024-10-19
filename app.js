@@ -19,6 +19,7 @@ app.use(session({
   resave: false,                  // Não salva a sessão de volta no store se ela não foi modificada
   saveUninitialized: true,        // Salva sessões não inicializadas
   cookie: { 
+    sameSite: 'None',
     secure: false,
     maxAge: null
   }

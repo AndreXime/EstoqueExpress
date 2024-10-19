@@ -6,7 +6,6 @@
     <title>EverythingAtOnce</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/icons/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/img/preloader.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
     @media (max-width: 991.98px) {
@@ -136,15 +135,8 @@
     <!-- Footer-->
     <%- include('partials/footer') %>
 
-    <div id="carregamento"></div>
     <script src="/js/bootstrap.bundle.js"></script>
     <script>
-        const preloader = document.querySelector('#carregamento');
-        if (preloader) {
-            window.addEventListener('DOMContentLoaded', () => {
-                preloader.remove();
-            });
-        }
         
     </script>
 </body>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/preloader.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
         /* Animação para os card aparecer suavemente */
@@ -41,8 +40,7 @@
 
     </style>
 </head>
-<body style="display: none;" class="d-flex flex-column">
-<div id="carregamento"></div>
+<body class="d-flex flex-column">
 <%- include('partials/nav') %>
 
 <main class="container flex-grow-1 main-content">
@@ -144,12 +142,6 @@ document.getElementById('cardCreator').addEventListener('submit', () => {
     }, 3000); // Tempo que o popup ficará visível
 });
 
-const preloader = document.querySelector('#carregamento');
-if (preloader) {
-  window.addEventListener('DOMContentLoaded', () => {
-    preloader.remove();
-  });
-}
 atualizar();
 
 document.getElementById ('cardCreator').addEventListener('submit', function(event) {

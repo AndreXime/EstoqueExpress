@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acessar conta</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/preloader.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
       @media (max-width: 991.98px) {
@@ -19,7 +18,7 @@
       }
     </style>
 </head>
-<body style="display: none; background-image: url(/img/dot.webp);" class="d-flex flex-column text-light">
+<body style="background-image: url(/img/dot.webp);" class="d-flex flex-column text-light">
 <%- include('partials/nav') %>
 
 <main class="container flex-grow-1 my-4">
@@ -99,15 +98,9 @@
 
 <%- include('partials/footer') %>
 
-<div id="carregamento"></div>
 <script src="/js/bootstrap.bundle.js"></script>
 <script>
-  const preloader = document.querySelector('#carregamento');
-  if (preloader) {
-    window.addEventListener('DOMContentLoaded', () => {
-      preloader.remove();
-    });
-  }
+ 
 </script>
 </body>
 </html>
