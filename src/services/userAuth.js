@@ -1,5 +1,5 @@
-import uService from './userCrud.js';
-import {validate} from '../middlewares/validator.js';
+import { validate } from '../middlewares/validator.js';
+import { User } from '../models/models.js'
 
 const registerUser = async (req) => {
     try{
@@ -7,7 +7,9 @@ const registerUser = async (req) => {
         
         await validate({ email:email, password:password, password_confirmation:password_confirmation, name:name }, 'register');
         
-        return await uService.createUser({ name, email, password});
+        const user = new User({ name:name, email:email, password:password});
+
+        return await user.save();
     } catch (err) {
         if(err.errors){
             throw err;
@@ -21,39 +23,17 @@ const loginUser = async (req) => {
 
         await validate({ email, password }, 'search') 
         
-        return await uService.searchUser({ email, password});
+        const user = await User.findOne({email:email, password:password});
+        if(!user)
+            throw {errors:{conta:['Usuario não existe']}};
+
+        return user;
     } catch (err){
         throw {errors:{contaL:['Usuario não existe']}} 
     }
 };
-const deleteUser = async (req) => {
-    try{
-        const { email, password } = req;
-
-        await validate({ email, password }, 'search');
-        
-        return await uService.deleteUser({ email, password});
-    } catch (err) {
-        throw err;
-    }
-};
-/*const updateUser = async (req) => {
-    try{
-        const { email, password, newname, newemail, newpassword, newpassword_confirmation } = req;
-
-        await validate({ email, password }, 'search');
-        await validate({ email: newemail, password: newpassword,password_confirmation:newpassword_confirmation, name: newname }, 'register');
-
-        return await uService.updateUser({ email: email, password: password },{ name: newname, email: newemail, password: newpassword });
-    } catch (err) {
-        throw err;
-    }
-};
-*/
 
 export default {
     registerUser,
     loginUser,
-    deleteUser,
-    //updateUser
 };

@@ -1,4 +1,4 @@
-import {Estoque,User} from '../models/models.js';
+import { Estoque } from '../models/models.js';
 import { Types } from 'mongoose';
 
 const createEstoque = async (userId,titulo) => {

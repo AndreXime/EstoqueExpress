@@ -1,14 +1,14 @@
 import { Router } from 'express';
 const router = Router();
-import render from '../controllers/render_Controller.js';
-import api from '../controllers/api_Controller.js';
+import render from '../controllers/renderController.js';
+import api from '../controllers/apiControllers.js';
 
-router.get('/', render.getHome);
-router.get('/entrar', render.getLoginRegister);
-router.get('/menu',render.getMenu);
-router.get('/dashboard',render.getDash);
-router.get('/sobrenos',render.getSobrenos);
-router.get('/atualizarConta',render.getUpdate);
+router.get('/', render.home);
+router.get('/entrar', render.acess);
+router.get('/menu',render.menu);
+router.get('/dashboard',render.dash);
+router.get('/sobrenos',render.sobrenos);
+router.get('/atualizarConta',render.update);
 
 router.post('/api/login', api.login);
 router.post('/api/register',api.register);

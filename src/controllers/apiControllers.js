@@ -1,12 +1,12 @@
-import estoque from "../services/userProduct.js";
-import auth from "../services/userAuth.js";
-import userCrud from "../services/userCrud.js";
+import Estoque from "../services/userProduct.js";
+import Auth from "../services/userAuth.js";
+import Data from "../services/userData.js";
 
 
 const login = async (req,res) => {
     delete req.session.result;
     try{
-        const response = await auth.loginUser(req.body);
+        const response = await Auth.loginUser(req.body);
         req.session.usuario = response;
         return res.redirect('/menu');
     }catch(err){
@@ -17,7 +17,7 @@ const login = async (req,res) => {
 const register = async (req,res) => {
     delete req.session.result;
     try{
-        const response = await auth.registerUser(req.body);
+        const response = await Auth.registerUser(req.body);
         req.session.usuario = response;
         return res.redirect('/menu');
     }catch(err){
@@ -35,7 +35,7 @@ const update = async(req,res) => {
         res.status(403).send("Forbidden");
     }else{
         try {
-            await userCrud.updateUser(user._id,req.body);
+            await Data.updateUser(user._id,req.body);
             res.redirect('/atualizarConta')
         }catch(error){
             res.status(400).send("Failed");
@@ -49,7 +49,7 @@ const addProduto = async (req,res) =>{
         res.status(403).send("Forbidden");
     }else{
         try{
-            await estoque.createProduto(req.query.id,req.body);
+            await Estoque.createProduto(req.query.id,req.body);
             res.status(200).send("Sucess");
         }catch(err){
             res.status(400).send("Failed");
@@ -62,7 +62,7 @@ const addEstoque = async (req,res) =>{
         res.status(403).send("Forbidden");
     }else{
         try {
-            estoquenovo = await estoque.createEstoque(user._id,req.body.titulo);
+            estoquenovo = await Estoque.createEstoque(user._id,req.body.titulo);
             res.status(200).send("Success");
         }catch(err){
             res.status(400).send("Failed");
@@ -77,7 +77,7 @@ const removeEstoque = async (req,res) =>{
     }else{
         try{
             const id = req.query.id;
-            await estoque.removeEstoque(id);
+            await Estoque.removeEstoque(id);
             res.status(200).send("Sucess");
         }catch(err){
             res.status(400).send("Failed");
@@ -92,7 +92,7 @@ const removeProduto = async (req,res) =>{
         try{
             const id = req.query.id;
             const idproduto = req.query.idproduto
-            await estoque.removeProduto(id,idproduto);
+            await Estoque.removeProduto(id,idproduto);
             res.status(200).send("Sucess");
         }catch(err){
             res.status(400).send("Failed");

@@ -1,13 +1,13 @@
 import estoqueServ from "../services/userProduct.js";
-import userCrud from "../services/userCrud.js";
+import userCrud from "../services/userData.js";
 
-const getHome = async (req,res) => {
+const home = async (req,res) => {
     res.render('home');
 }
-const getSobrenos = async (req,res) =>{
+const sobrenos = async (req,res) =>{
     res.render('sobre')
 }
-const getLoginRegister = async (req,res) => {
+const acess = async (req,res) => {
     if(req.session.usuario){
         res.redirect('/menu');
     }else{
@@ -20,7 +20,7 @@ const getLoginRegister = async (req,res) => {
         res.render('login',{ resultado });
     }
 }
-const getUpdate = async (req,res) =>{
+const update = async (req,res) =>{
     const user = req.session.usuario;
     if(!user){
         res.redirect('entrar');
@@ -30,7 +30,7 @@ const getUpdate = async (req,res) =>{
         res.render("update",{refreshUser, estoques});
     }
 }
-const getMenu = async (req,res) => {
+const menu = async (req,res) => {
     const user = req.session.usuario;
     if(!user){
         res.redirect('entrar');
@@ -40,7 +40,7 @@ const getMenu = async (req,res) => {
         res.render('menu',{ estoques });
     }
 }
-const getDash = async (req,res) =>{
+const dash = async (req,res) =>{
     const user = req.session.usuario;
     if(!user){
         res.redirect('entrar');
@@ -55,10 +55,10 @@ const getDash = async (req,res) =>{
 }
 
 export default {
-    getHome,
-    getLoginRegister,
-    getDash,
-    getMenu,
-    getSobrenos,
-    getUpdate
+    home,
+    acess,
+    dash,
+    menu,
+    sobrenos,
+    update
 };

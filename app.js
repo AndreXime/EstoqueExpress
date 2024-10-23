@@ -1,7 +1,7 @@
 import express from 'express';
 import routes from './src/routes/routes.js';
 import session from 'express-session';
-import './src/config/db.js'; // Conecta ao BD
+import './src/database/init_database.js'; // Conecta ao BD
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(express.static('public')); // Para arquivos estáticos
 app.use(express.urlencoded({ extended: true })); // Para entender dados de formulários
 
 app.use(session({
-  secret: process.env.SECRET_KEY, // Uma chave secreta para assinar o cookie da sessão
+  secret: process.env.SESSION_KEY, // Uma chave secreta para assinar o cookie da sessão
   resave: false,                  // Não salva a sessão de volta no store se ela não foi modificada
   saveUninitialized: true,        // Salva sessões não inicializadas
   cookie: { 
