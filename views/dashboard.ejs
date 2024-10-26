@@ -79,7 +79,9 @@
                     </div>
                   </div>
                   <p style="display: none;" id="id"><%= id %></p>
-                  <input class="btn btn-primary" id="criarObjeto" type="submit" value="Criar objeto">
+                  <div class="d-grid gap-2">
+                    <input style="font-size: 125%;" class="btn btn-primary" id="criarObjeto" type="submit" value="Criar produto">
+                  </div>
                 </form>
               </div>
               <div id="popup" class="popup" style="display: none;">
@@ -115,15 +117,15 @@
                       <button class="btn btn-danger deletar">Apagar</button>
                   </div>
                 </div>
-              </div>
             </div>
+          </div>
         </div>
       <% });%>   
     </div>
   </div>
 </main>
 
-<%- include('partials/nav') %>
+<%- include('partials/footer') %>
 
 <script src="/js/bootstrap.bundle.js"></script>
 <script>

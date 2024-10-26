@@ -1,5 +1,5 @@
-import estoqueServ from "../services/userProduct.js";
-import userCrud from "../services/userData.js";
+import Estoque from "../services/userProduct.js";
+import Data from "../services/userData.js";
 
 const home = async (req,res) => {
     res.render('home');
@@ -25,8 +25,8 @@ const update = async (req,res) =>{
     if(!user){
         res.redirect('entrar');
     }else{
-        const estoques = await estoqueServ.searchUserEstoques(user._id) || null;
-        const refreshUser = await userCrud.searchUserById(user._id);
+        const estoques = await Estoque.searchUserEstoques(user._id) || null;
+        const refreshUser = await Data.searchUserById(user._id);
         res.render("update",{refreshUser, estoques});
     }
 }
@@ -35,8 +35,7 @@ const menu = async (req,res) => {
     if(!user){
         res.redirect('entrar');
     }else{
-        const estoques = await estoqueServ.searchUserEstoques(user._id) || null
-
+        const estoques = await Estoque.searchUserEstoques(user._id) || null;
         res.render('menu',{ estoques });
     }
 }
@@ -46,7 +45,7 @@ const dash = async (req,res) =>{
         res.redirect('entrar');
     }else{
         const id = req.query.id;
-        const estoques = await estoqueServ.searchOneEstoque(id) || null
+        const estoques = await Estoque.searchOneEstoque(id) || null
         const produtos = estoques.produtosEstoque;
         console.log(estoques,produtos);
 

@@ -8,7 +8,6 @@ const registerUser = async (req) => {
         await validate({ email:email, password:password, password_confirmation:password_confirmation, name:name }, 'register');
         
         const user = new User({ name:name, email:email, password:password});
-
         return await user.save();
     } catch (err) {
         if(err.errors){
@@ -23,7 +22,7 @@ const loginUser = async (req) => {
 
         await validate({ email, password }, 'search') 
         
-        const user = await User.findOne({email:email, password:password});
+        const user = await User.findOne({ email:email, password:password });
         if(!user)
             throw {errors:{conta:['Usuario não existe']}};
 

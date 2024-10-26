@@ -6,7 +6,6 @@ services:
     depends_on:
       - mongo
     environment:
-      - PORT=3000
       - MONGO_URI=mongodb://mongo:27017/meuBancoDados
       - SESSION_KEY=Dg4251gH1IDCMWfHSg7o7fS1zlWDE
 

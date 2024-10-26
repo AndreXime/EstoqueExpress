@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu principal</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/icons/bootstrap-icons.min.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
         /* Animação para os card aparecer suavemente */
@@ -30,8 +31,10 @@
         .popup {
           position: fixed;
           display: none;
-          top: 20px;
-          right: 20px;
+          top: 25px;
+          right: 25px;
+          font-size: 120%;
+          font-weight: bolder;
           background-color: #78a179;
           color: white;
           padding: 15px;
@@ -72,9 +75,13 @@
             <h4 class="card-title"> Crie seu estoque</h4>
             <p class="card-text">Clique para gerar um novo estoque para produtos</p>
             <form id="criarEstoque">
-              <label class="form-label" for="nome">Nome do estoque</label>
-              <input class="form-control" required type="text" name="titulo">
-              <button type="submit" class="btn btn-primary mt-4">Criar estoque</button>
+              <div class="input-group">
+                <div class="form-floating">
+                  <input aria-label="Titulo" aria-describedby="basic-addon2" placeholder="titulo" id="loginPassword" class="form-control" required type="text" name="titulo">
+                  <label for="titulo">Nome do estoque</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Criar estoque</button>
+              </div>
               <div class="popup" id="popup"></div>
             </form>
           </div>
@@ -164,11 +171,6 @@ document.getElementById ('criarEstoque').addEventListener('submit', function(eve
     // Atualizar os eventListener de deletar
     atualizar();
   });
-
-function validateNumber(input) {
-  // Remove todos os caracteres que não sejam números
-  input.value = input.value.replace(/\D/g, '');
-}
 
 function atualizar(){
   const botoesNext = document.querySelectorAll('.tabela');

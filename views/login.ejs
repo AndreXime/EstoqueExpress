@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acessar conta</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/icons/bootstrap-icons.min.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
       @media (max-width: 991.98px) {
@@ -28,6 +29,7 @@
     <li class="nav-item">
       <a class="nav-link active border border-primary rounded-lg" id="tab-login">Login</a>
     </li>
+    <li style="cursor: default" class="px-3"></li>
     <li class="nav-item">
       <a class="nav-link border border-primary rounded-lg" id="tab-register">Registrar</a>
     </li>
@@ -37,16 +39,27 @@
   <div class="tab-content">
     <div class="tab-pane show active" id="pills-login">
       <form action="/api/login" method="POST">
+
         <!-- Email input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="loginName">Email</label>
-          <input type="email" id="loginName" name="email" class="form-control" />
+        <div class="input-group mb-4">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="bi bi-envelope"></i>
+          </span>
+          <div class="form-floating">
+            <input type="email" class="form-control" id="loginName" name="email" placeholder="name@example.com" aria-label="Email" aria-describedby="basic-addon1">
+            <label for="loginName">Email</label>
+          </div>
         </div>
-  
+        
         <!-- Password input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="loginPassword">Senha</label>
-          <input type="password" id="loginPassword" name="password" class="form-control" />
+        <div class="input-group mb-4">
+          <span class="input-group-text" id="basic-addon2">
+            <i class="bi bi-lock"></i>
+          </span>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon2">
+            <label for="loginPassword">Senha</label>
+          </div>
         </div>
   
         <!-- 2 column grid layout -->
@@ -60,7 +73,9 @@
   
         <!-- Submit button -->
         <div class="text-center mb-4">
-          <button type="submit" class="btn btn-primary">Fazer login</button>
+          <button type="submit" class="btn btn-warning btn-lg rounded-pill shadow">
+            <i class="bi bi-check-circle"></i> Fazer login
+          </button>
         </div>
         <% if (resultado.contaL) { %>
           <% resultado.contaL.forEach(function(conta) { %>
@@ -74,32 +89,54 @@
     <div class="tab-pane" id="pills-register">
       <form action="/api/register" method="POST">
         <!-- Name input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="registerName">Nome</label>
-          <input type="text" id="registerName" name="name" class="form-control" />
+      <div class="input-group mb-4">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="bi bi-person"></i>
+        </span>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="registerName" name="name" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
+          <label for="registerName">Nome</label>
         </div>
-  
-        <!-- Email input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="registerEmail">Email</label>
-          <input type="email" id="registerEmail" name="email" class="form-control" />
+      </div>
+
+      <!-- Email input -->
+      <div class="input-group mb-4">
+        <span class="input-group-text" id="basic-addon2">
+          <i class="bi bi-envelope"></i>
+        </span>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon2">
+          <label for="registerEmail">Email</label>
         </div>
-  
-        <!-- Password input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="registerPassword">Senha</label>
-          <input type="password" id="registerPassword" name="password" class="form-control" />
+      </div>
+
+      <!-- Password input -->
+      <div class="input-group mb-4">
+        <span class="input-group-text" id="basic-addon3">
+          <i class="bi bi-lock"></i>
+        </span>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon3">
+          <label for="registerPassword">Senha</label>
         </div>
-  
-        <!-- Repeat Password input -->
-        <div class="form-outline mb-4">
-          <label class="form-label" for="registerRepeatPassword">Senha novamente</label>
-          <input type="password" id="registerRepeatPassword" name="password_confirmation" class="form-control" />
+      </div>
+
+      <!-- Repeat Password input -->
+      <div class="input-group mb-4">
+        <span class="input-group-text" id="basic-addon4">
+          <i class="bi bi-lock"></i>
+        </span>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="registerRepeatPassword" name="password_confirmation" placeholder="Senha novamente" aria-label="Senha novamente" aria-describedby="basic-addon4">
+          <label for="registerRepeatPassword">Senha novamente</label>
         </div>
+      </div>
         
         <!-- Submit button -->
         <div class="text-center mb-4">
-          <button type="submit" class="btn btn-primary">Fazer cadastro</button>
+          <button type="submit" class="btn btn-warning btn-lg rounded-pill shadow">
+            <i class="bi bi-check-circle"></i> Registrar
+          </button>
         </div>
         <% if (resultado.contaR) { %>
           <% resultado.contaR.forEach(function(conta) { %>

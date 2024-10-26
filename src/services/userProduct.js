@@ -45,8 +45,6 @@ const removeProduto = async(estoqueId,id) => {
     return resultado;
 }
 
-
-
 export default {
     createProduto,
     createEstoque,

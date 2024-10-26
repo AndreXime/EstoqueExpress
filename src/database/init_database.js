@@ -1,6 +1,8 @@
 import mongoose, { connect, set } from 'mongoose';
 
-const MONGO = process.env.MONGO_URI;
+const MONGO = "mongodb://localhost:27017/meuBancoDados";
+// mongodb://localhost:27017/mongodb
+// mongodb://mongo:27017/meuBancoDados
 
 connect(MONGO)
 .then(() => console.log('\nConnection to MongoDB was successful!\n'))

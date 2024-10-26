@@ -11,12 +11,12 @@ router.get('/sobrenos',render.sobrenos);
 router.get('/atualizarConta',render.update);
 
 router.post('/api/login', api.login);
-router.post('/api/register',api.register);
-router.get('/api/logout',api.logout);
-router.post('/api/update',api.update)
+router.post('/api/register', api.register);
+router.get('/api/logout', api.logout);
+router.post('/api/update', api.update);
 
-router.post('/api/addProduto',api.addProduto);
-router.post('/api/addEstoque',api.addEstoque);
+router.post('/api/addProduto', api.addProduto);
+router.post('/api/addEstoque', api.addEstoque);
 router.post('/api/removeEstoque',api.removeEstoque);
 router.post('/api/removeProduto',api.removeProduto);
 
