@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="container my-2">
-        <table class="table table-striped table-hover table-bordered">
+        <table class="table table-striped table-hover table-bordered animar-criacao">
           <thead>
             <tr>
               <th>Título</th>
@@ -73,14 +73,14 @@
           </thead>
           <tbody id="objetoContainer">
             <% produtos.forEach(card => { %>
-            <tr>
+            <tr class="animar-criacao">
                 <td><%= card.titulo %></td>
                 <td>R$: <%= card.preco %></td>
                 <td><%= card.quantidade %></td>
                 <td><%= card.validade %></td>
                 <td><%= card.categoria %></td>
                 <td><%= card.fornecedor %></td>
-                <td class="d-flex justify-content-between">
+                <td class="d-flex justify-content-center align-items-center">
                   <p style="display:none" id="idProduto"> <%= card._id %> </p>
                   <button class="btn btn-danger deletar">Apagar</button>
                 </td>

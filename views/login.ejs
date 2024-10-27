@@ -6,6 +6,7 @@
     <title>Acessar conta</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/aparecer.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
     <style>
       @media (max-width: 991.98px) {
@@ -29,7 +30,7 @@
     <li class="nav-item">
       <a class="nav-link active border border-primary rounded-lg" id="tab-login">Login</a>
     </li>
-    <li style="cursor: default" class="px-3"></li>
+    <li style="cursor: default; background-color: #faf9fa;" class="px-3"></li>
     <li class="nav-item">
       <a class="nav-link border border-primary rounded-lg" id="tab-register">Registrar</a>
     </li>
@@ -77,12 +78,6 @@
             <i class="bi bi-check-circle"></i> Fazer login
           </button>
         </div>
-        <% if (resultado.contaL) { %>
-          <% resultado.contaL.forEach(function(conta) { %>
-            <div class="alert alert-danger mt-3" role="alert">
-              <%= conta %>
-            </div>
-        <% });} %>
       </form>
     </div>
     
@@ -138,63 +133,38 @@
             <i class="bi bi-check-circle"></i> Registrar
           </button>
         </div>
-        <% if (resultado.contaR) { %>
-          <% resultado.contaR.forEach(function(conta) { %>
-            <div class="alert alert-danger mt-3" role="alert">
-              <%= conta %>
-            </div>
-        <% });} %>
-        <% if (resultado.email) { %>
-          <% resultado.email.forEach(function(email) { %>
-            <div class="alert alert-danger mt-3" role="alert">
-              <%= email %>
-            </div>
-        <% });} %>
-        <% if (resultado.password) { %>
-          <% resultado.password.forEach(function(passwd) { %>
-            <div class="alert alert-danger mt-3" role="alert">
-              <%= passwd %>
-            </div>
-        <% });} %>
       </form>
     </div>
   </div>
+          <% if (resultado.contaL) { %>
+            <% resultado.contaL.forEach(function(conta) { %>
+              <div id="popup" class="alert alert-danger mt-3 popup" role="alert">
+                <%= conta %>
+              </div>
+          <% });} %>
+          <% if (resultado.contaR) { %>
+            <% resultado.contaR.forEach(function(conta) { %>
+              <div id="popup" class="alert alert-danger mt-3 popup" role="alert">
+                <%= conta %>
+              </div>
+          <% });} %>
+          <% if (resultado.email) { %>
+            <% resultado.email.forEach(function(email) { %>
+              <div id="popup" class="alert alert-danger mt-3 popup" role="alert">
+                <%= email %>
+              </div>
+          <% });} %>
+          <% if (resultado.password) { %>
+            <% resultado.password.forEach(function(passwd) { %>
+              <div id="popup" class="alert alert-danger mt-3 popup" role="alert">
+                <%= passwd %>
+              </div>
+          <% });} %>
 </main>
 
 <%- include('partials/footer') %>
 
 <script src="/js/bootstrap.bundle.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const tabLogin = document.getElementById("tab-login");
-    const tabRegister = document.getElementById("tab-register");
-    const pillsLogin = document.getElementById("pills-login");
-    const pillsRegister = document.getElementById("pills-register");
-
-    // Função para mostrar a aba de Login
-    tabLogin.addEventListener("click", function (event) {
-      event.preventDefault(); 
-      // Alterar classes para tornar a aba de login ativa
-      tabLogin.classList.add("active");
-      tabRegister.classList.remove("active");
-
-      // Mostrar o conteúdo de Login e esconder o de Register
-      pillsLogin.classList.add("show", "active");
-      pillsRegister.classList.remove("show", "active");
-    });
-
-    // Função para mostrar a aba de Register
-    tabRegister.addEventListener("click", function (event) {
-      event.preventDefault();
-      // Alterar classes para tornar a aba de registro ativa
-      tabRegister.classList.add("active");
-      tabLogin.classList.remove("active");
-
-      // Mostrar o conteúdo de Register e esconder o de Login
-      pillsRegister.classList.add("show", "active");
-      pillsLogin.classList.remove("show", "active");
-    });
-  });
-</script>
+<script src="/js/login.js"></script>
 </body>
 </html>

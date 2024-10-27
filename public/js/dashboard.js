@@ -4,11 +4,11 @@ document.getElementById('cardCreator').addEventListener('submit', () => {
 
    // Esconde o popup após 3 segundos
    setTimeout(() => {
-       popup.style.opacity = '0'; // Anima a opacidade
+       popup.style.opacity = '0';
        setTimeout(() => {
-           popup.style.display = 'none'; // Remove do DOM após a animação
-           popup.style.opacity = '1'; // Reseta a opacidade para a próxima vez
-       }, 500); // Espera o tempo da animação
+           popup.style.display = 'none';
+           popup.style.opacity = '1';
+       }, 500);
    }, 3000); // Tempo que o popup ficará visível
 });
 
@@ -38,6 +38,7 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
 
   // Cria o elemento a ser animado
   const produto = document.createElement('tr');
+  produto.classList.add("animar-criacao");
   produto.innerHTML = `
     <td>${titulo}</td>
     <td>R$:${preco}</td>
@@ -45,7 +46,7 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
     <td>${validade}</td>
     <td>${categoria}</td>
     <td>${fornecedor}</td>
-    <td class="d-flex justify-content-between">
+    <td>
       <p style="display:none" id="idProduto">${response}</p>
       <button class="btn btn-danger deletar">Apagar</button>
     </td>
