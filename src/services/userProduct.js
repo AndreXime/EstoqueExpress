@@ -23,7 +23,7 @@ const searchUserEstoques = async (UserId) => {
     return estoque;
 }
 const searchOneEstoque = async (id) => {
-    const estoque = await Estoque.findById( Types.ObjectId.createFromHexString(id));
+    const estoque = await Estoque.findById( Types.ObjectId.createFromHexString(id) );
     if(!estoque){
         throw new Error;
     }

@@ -62,8 +62,8 @@ const addEstoque = async (req,res) =>{
         res.status(403).send("Forbidden");
     }else{
         try {
-            estoquenovo = await Estoque.createEstoque(user._id,req.body.titulo);
-            res.status(200).send("Success");
+            const estoquenovo = await Estoque.createEstoque(user._id,req.body.titulo);
+            res.status(200).json(estoquenovo);
         }catch(err){
             res.status(400).send("Failed");
         }

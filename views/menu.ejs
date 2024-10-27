@@ -6,74 +6,21 @@
     <title>Menu principal</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/aparecer.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
-    <style>
-        /* Animação para os card aparecer suavemente */
-        @keyframes aparecer {
-          0% {
-            transform: scale(0);
-            opacity: 0;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-
-        .animar-criacao {
-          animation: aparecer 1s ease-in-out;
-        }
-
-        body,html{
-          height: 100%;
-        }
-
-        .popup {
-          position: fixed;
-          display: none;
-          top: 25px;
-          right: 25px;
-          font-size: 120%;
-          font-weight: bolder;
-          background-color: #78a179;
-          color: white;
-          padding: 15px;
-          border-radius: 5px;
-          transition: opacity 0.5s ease;
-        }
-
-        .card-body{
-          background-color: #FFFFF0;
-        }
-
-    </style>
 </head>
 <body style="background-image: url(/img/dot.webp);" class="d-flex flex-column">
   
-<%- include('partials/nav') %>
+<%- include('partials/nav-logged') %>
 
 <main class="container flex-grow-1 my-4">
   <div class="container">
     <div id="objetoContainer" class="row justify-content-center">  
-      <div class="col-md-5 mb-4 produto">
-        <div class="card animar-criacao text-center">
-          <div class="card-body">
-            <h4 class="card-title"> Editar perfil</h4>
-            <p class="card-text">Clique aqui para editar seu nome, email ou senha</p>
-            <a href="/atualizarConta" class="btn btn-warning atualizar">Editar</a>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title"> Fazer logout</h4>
-            <p class="card-text">Clique para sair da sua conta</p>
-            <a href="/api/logout" class="btn btn-info atualizar">Sair</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4 produto">
+      <div class="col-md-12 mb-4 produto">
         <div class="card animar-criacao text-center">
           <div class="card-body">
             <h4 class="card-title"> Crie seu estoque</h4>
-            <p class="card-text">Clique para gerar um novo estoque para produtos</p>
+            <p class="card-text">Faça um novo estoque para os seus produtos</p>
             <form id="criarEstoque">
               <div class="input-group">
                 <div class="form-floating">
@@ -108,100 +55,6 @@
 <%- include('partials/footer') %>
 
 <script src="/js/bootstrap.bundle.js"></script>
-<script>
-function popupballon(bool){
-    const popup = document.getElementById('popup');
-    
-    if(bool){
-      popup.innerHTML = "Sucesso";
-    }else{
-      popup.innerHTML = "Algo ocorreu";
-    }
-    popup.style.display = 'block'; // Mostra o popup
-
-    // Esconde o popup após 3 segundos
-    setTimeout(() => {
-        popup.style.opacity = '0'; // Anima a opacidade
-        setTimeout(() => {
-            popup.style.display = 'none'; // Remove do DOM após a animação
-            popup.style.opacity = '1'; // Reseta a opacidade para a próxima vez
-        }, 500); // Espera o tempo da animação
-    }, 5000);
-};
-
-atualizar();
-
-document.getElementById ('criarEstoque').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const titulo = formData.get('titulo');
-
-    const response = fetch('/api/addEstoque',{
-      method: 'Post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        titulo
-      })
-    });
-    if(!response){
-      popupballon(false);
-      return;
-    }
-    popupballon(true);
-
-    // Cria o elemento a ser animado
-    const card = document.createElement('div');
-    card.classList.add('col-md-3', 'mb-4', 'produto'); // Adiciona classe para coluna e margem
-    card.innerHTML = `
-      <div class="card animar-criacao">
-        <div class="card-body text-center">
-          <h4 class="card-title"> ${titulo} </h4>
-          <p style="display: none;" id="id">${response}<p>
-          <p class="card-text">Acesse seu estoque aqui</p>  
-          <button class="btn btn-success tabela">Entrar</button>
-          <button class="btn btn-danger remover">Remover</button>
-        </div>
-      </div>
-    `;
-    
-    // Adiciona o card ao container
-    document.getElementById('objetoContainer').appendChild(card);
-    
-    // Atualizar os eventListener de deletar
-    atualizar();
-  });
-
-function atualizar(){
-  const botoesNext = document.querySelectorAll('.tabela');
-  const botoesRemove = document.querySelectorAll('.remover');
-
-  botoesNext.forEach(function(botao) {
-      botao.addEventListener('click', function() {
-
-        // Subir na hierarquia até encontrar o div pai
-        const cardbody = botao.closest('.card-body');
-        const id = cardbody.querySelector('#id').textContent.trim();
-
-        window.location.href = `dashboard?id=${id}`;
-      });
-  });
-  botoesRemove.forEach(function(botao) {
-      botao.addEventListener('click', function() {
-        const cardbody = botao.closest('.card-body');
-        const id = cardbody.querySelector('#id').textContent.trim();
-        fetch(`/api/removeEstoque?id=${id}`,{
-          method: 'Post',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ })
-        });
-        
-        const card = botao.closest('.produto');
-        card.remove();
-      });
-  });
-}
-
-</script>
+<script src="/js/menu.js"></script>
 </body>
 </html>
