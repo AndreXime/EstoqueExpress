@@ -25,9 +25,7 @@ A estrutura de pastas do projeto segue uma organização modular e escalável:
 ├── /src
 │   ├── /controllers         
 │   │   ├── apiControllers.js   # Controller das apis
-│   │   └── renderController.js # Controller do frontend
-│   ├── /database            
-│   │   └── init_database.js    # Inicialização do banco de dados
+│   │   └── renderController.js # Controller do frontend           
 │   ├── /middlewares         
 │   │   └── validator.js        # Validador dos dados de input
 │   ├── /models              
@@ -42,6 +40,7 @@ A estrutura de pastas do projeto segue uma organização modular e escalável:
 ├── /views   # Arquivos EJS do frontend
 |
 ├── app.js   # Arquivo principal
+│── init_database.js    # Inicialização do banco de dados
 ├── docker-compose.yml       
 ├── package.json
 ├── ...             
