@@ -14,21 +14,22 @@ app.use(express.json()); // Para entender requisições JSON
 app.use(express.static('public')); // Para arquivos estáticos
 app.use(express.urlencoded({ extended: true })); // Para entender dados de formulários
 
-app.use(session({
-  secret: "Dg4251gH1IDCMWfHSg7o7fS1zlWDE", // Uma chave secreta para assinar o cookie da sessão
-  resave: false,                  // Não salva a sessão de volta no store se ela não foi modificada
-  saveUninitialized: true,        // Salva sessões não inicializadas
-  cookie: { 
-    secure: false,
-    maxAge: null
-  }
-}));
+app.use(
+  session({
+    secret: process.env.SESION_KEY, // Uma chave secreta para assinar o cookie da sessão
+    resave: false, // Não salva a sessão de volta no store se ela não foi modificada
+    saveUninitialized: true, // Salva sessões não inicializadas
+    cookie: {
+      secure: false,
+      maxAge: null,
+    },
+  })
+);
 
 
 //Medir o tempo de resposta
 app.use((req, res, next) => {
-    const start = process.hrtime(); // Marca o início da requisição com alta precisão
-  
+    const start = process.hrtime();
     // Evento 'finish' é disparado quando a resposta termina
     res.on('finish', () => {
       const diff = process.hrtime(start); // Calcula a diferença
@@ -36,7 +37,6 @@ app.use((req, res, next) => {
       const milliseconds = diff[1] / 1e6; // Converte nanosegundos em milissegundos
       console.log(`Tempo de resposta: ${seconds}s e ${milliseconds.toFixed(3)}ms`);
     });
-  
     next(); // Continua para o próximo middleware
 });
 
