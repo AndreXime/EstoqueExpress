@@ -13,7 +13,8 @@ const createProduto = async (id,produto) => {
         throw new Error;
     }
     estoque.produtosEstoque.push(produto);
-    return estoque.save();
+    const produtoNovo = await estoque.save(); 
+    return produtoNovo._id;
 }
 const searchUserEstoques = async (UserId) => {
     const estoque = await Estoque.find({userOwner:UserId});

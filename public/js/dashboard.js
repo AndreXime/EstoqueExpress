@@ -14,7 +14,7 @@ document.getElementById('cardCreator').addEventListener('submit', () => {
 
 atualizar();
 
-document.getElementById ('cardCreator').addEventListener('submit', function(event) {
+document.getElementById ('cardCreator').addEventListener('submit', async function(event) {
   event.preventDefault();
 
   const formData = new FormData(event.target);
@@ -27,7 +27,7 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
   const criadoEm = new Date().toLocaleDateString();
   const id = document.getElementById('id').innerText.trim(); 
 
-  const response = fetch(`/api/addProduto?id=${id}`,{
+  const response = await fetch(`/api/addProduto?id=${id}`,{
     method: 'Post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -35,19 +35,32 @@ document.getElementById ('cardCreator').addEventListener('submit', function(even
       preco,categoria,fornecedor,criadoEm
     })
   });
+  const data = await response.json();
+
+
+  const diffDays = Math.ceil(
+    (new Date(validade) - new Date()) / (1000 * 60 * 60 * 24)
+  );
+  let resultado;
+  if (!diffDays) {
+    resultado = '<td style="background-color:grey" class="text-center">Não vence</td>';
+  } else if (diffDays < 0)
+    resultado = `<td style="background-color:red; color:white" class="text-center">VENCIDO</td>`;
+  else
+    resultado = `<td style="background-color:green; color:white">${diffDays} dias</td>`;
 
   // Cria o elemento a ser animado
   const produto = document.createElement('tr');
   produto.classList.add("animar-criacao");
   produto.innerHTML = `
     <td>${titulo}</td>
-    <td>R$:${preco}</td>
+    <td>R$:${Number(preco).toFixed(2)}</td>
     <td>${quantidade}</td>
-    <td>${validade}</td>
-    <td>${categoria}</td>
+    ${resultado}
+    <td>${categoria}</td> 
     <td>${fornecedor}</td>
-    <td>
-      <p style="display:none" id="idProduto">${response}</p>
+    <td class="d-flex justify-content-center align-items-center">
+      <p style="display:none" id="idProduto">${data}</p>
       <button class="btn btn-danger deletar">Apagar</button>
     </td>
   `;
@@ -72,7 +85,7 @@ function atualizar(){
        const closest = botao.closest('td');
        const idproduto = closest.querySelector('#idProduto').textContent.trim();
 
-       const response = fetch(`/api/removeProduto?id=${id}&idproduto=${idproduto}`,{
+       fetch(`/api/removeProduto?id=${id}&idproduto=${idproduto}`,{
          method: 'Post',
          headers: { 'Content-Type': 'application/json' },
        });

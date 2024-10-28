@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true })); // Para entender dados de formu
 
 app.use(
   session({
-    secret: process.env.SESION_KEY, // Uma chave secreta para assinar o cookie da sessão
+    secret: "Dg4251gH1IDCMWfHSg7o7fS1zlWDE", // Uma chave secreta para assinar o cookie da sessão
     resave: false, // Não salva a sessão de volta no store se ela não foi modificada
     saveUninitialized: true, // Salva sessões não inicializadas
     cookie: {

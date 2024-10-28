@@ -14,12 +14,6 @@
    animation: aparecer 1s ease-in-out;
 }
 
-body,html{
-   height: 100%;
-   width: 100%;
-   overflow: hidden;
-}
-
 .popup {
    position: fixed;
    display: none;

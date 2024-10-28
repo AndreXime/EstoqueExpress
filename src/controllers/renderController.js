@@ -47,7 +47,7 @@ const dash = async (req,res) =>{
         const id = req.query.id;
         const estoques = await Estoque.searchOneEstoque(id) || null
         const produtos = estoques.produtosEstoque;
-
+        
         res.render('dashboard',{ id , produtos });
     }
 }

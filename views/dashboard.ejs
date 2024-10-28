@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/css/aparecer.css">
     <link rel="icon" type="image/png" href="/img/icon.png">
 </head>
-<body class="d-flex flex-column">
+<body class="d-flex flex-column min-vh-100">
 <%- include('partials/nav-logged') %>
 
-<main class="container flex-grow-1 main-content my-3">
+<main class="container flex-grow-1 my-3">
   <div class="container">
     <div class="row mt-3">
       <div class="col-md mb-4">
@@ -25,12 +25,19 @@
                     </div>
                     <div class="mb-3 col-md-4">
                       <label for="priceProduct" class="form-label">Preço do produto</label>
-                      <input id="priceProduct" class="form-control" type="text" name="priceProduct">
+                      <input id="priceProduct" type="number" class="form-control" name="priceProduct" oninput="validateNumber(this)">
                     </div>
                     <div class="mb-3 col-md-4">
-                      <label for="categoryProduct" class="form-label">Categoria do produto</label>
-                      <input id="categoryProduct" class="form-control" type="text" name="categoryProduct">
-                    </div>
+                    <label for="categoryProduct" class="form-label">Categoria do produto</label>
+                    <select id="categoryProduct" class="form-select" name="categoryProduct">
+                      <option value="" selected>Selecione uma categoria</option>
+                      <option value="eletronicos">Alimentos e Bebidas</option>
+                      <option value="eletrodomesticos">Limpeza e Desinfecção</option>
+                      <option value="moveis">Roupas e Acessórios</option>
+                      <option value="vestuario">Brinquedos e Jogos</option>
+                      <option value="alimentos">Livros e Mídia</option>
+                    </select>
+                  </div>
                   </div>
                   <div class="row">
                     <div class="col-md-4 mb-3">
@@ -58,7 +65,7 @@
           </div>
       </div>
     </div>
-    <div class="container my-2">
+    <div class="container my-2 table-responsive">
         <table class="table table-striped table-hover table-bordered animar-criacao">
           <thead>
             <tr>
@@ -73,11 +80,22 @@
           </thead>
           <tbody id="objetoContainer">
             <% produtos.forEach(card => { %>
+            <% 
+                        const diffDays = Math.ceil((new Date(card.validade) - new Date()) / (1000 * 60 * 60 * 24));
+                        let resultado;
+                        if(!diffDays){
+                          resultado = '<td style="background-color:grey" class="text-center">Não vence</td>'
+                        }else if (diffDays < 0) { 
+                            resultado = `<td style="background-color:red; color:white" class="text-center">VENCIDO</td>`;
+                        } else { 
+                            resultado = `<td style="background-color:green; color:white" class="text-center">${diffDays} dias restantes</td>`;
+                        } 
+            %>
             <tr class="animar-criacao">
                 <td><%= card.titulo %></td>
-                <td>R$: <%= card.preco %></td>
+                <td>R$: <%= Number(card.preco).toFixed(2) %></td>
                 <td><%= card.quantidade %></td>
-                <td><%= card.validade %></td>
+                <%- resultado %>
                 <td><%= card.categoria %></td>
                 <td><%= card.fornecedor %></td>
                 <td class="d-flex justify-content-center align-items-center">
