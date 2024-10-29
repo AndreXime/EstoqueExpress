@@ -13,8 +13,11 @@ const createProduto = async (id,produto) => {
         throw new Error;
     }
     estoque.produtosEstoque.push(produto);
-    const produtoNovo = await estoque.save(); 
-    return produtoNovo._id;
+    const estoqueSalvo = await estoque.save();
+    // Assim que é salvo o produto está no topo entao pega o id do produto de cima
+    return estoqueSalvo.produtosEstoque[
+      estoqueSalvo.produtosEstoque.length - 1
+    ]._id;
 }
 const searchUserEstoques = async (UserId) => {
     const estoque = await Estoque.find({userOwner:UserId});
@@ -37,11 +40,14 @@ const removeEstoque = async(id) => {
     }
     return estoque;
 }
-const removeProduto = async(estoqueId,id) => {
+const removeProduto = async (estoqueId, id) => {
     const resultado = await Estoque.findByIdAndUpdate(
-        estoqueId, 
-        { $pull: { produtosEstoque: { _id: id } } }, // Remove o produto com o _id fornecido
-        { new: true } // Retorna o documento atualizado
+      Types.ObjectId.createFromHexString(estoqueId),
+      {
+        $pull: {
+          produtosEstoque: { _id: Types.ObjectId.createFromHexString(id) },
+        },
+      }
     );
     return resultado;
 }
