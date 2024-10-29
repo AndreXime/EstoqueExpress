@@ -1,9 +1,7 @@
 # Documentação
-## Pre-requisitos:
-- [Git](https://git-scm.com)
-- [Docker](https://www.docker.com/get-started)
 
 ## Instale e inicie o servidor:
+### Pre-requisitos: [Git](https://git-scm.com) & [Docker](https://www.docker.com/get-started)
 ```
 git clone https://github.com/AndreXime/EstoqueExpress.git
 cd EstoqueExpress
@@ -11,11 +9,15 @@ cd EstoqueExpress
 # Isso vai instalar o container do Mongo e do NodeJs
 docker compose up
 ```
+## Website com seguintes funcionalidades
+- Arquitetura MVC (Rotas, Frontend e Banco de dados)
+- Renderização server-side com EJS para gerar HTML dinâmico no servidor
+- Permitir criação e gestão de múltiplos estoques e produtos por usuário
+- Proteção de rotas e autenticação para acesso seguro
 
 ## Estrutura de Pastas
 
-A estrutura de pastas do projeto segue uma organização modular e escalável:
-
+A estrutura de pastas do projeto:
 
 ```
 /EstoqueExpress
