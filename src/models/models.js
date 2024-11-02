@@ -34,7 +34,6 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now(),
     },
-    estoque: [{ type: Schema.Types.ObjectId, ref: 'Estoque' }]
 });
 
 export const User = model('User', userSchema);

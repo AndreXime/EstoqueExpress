@@ -34,10 +34,10 @@ const searchOneEstoque = async (id) => {
     return estoque;
 }
 const removeEstoque = async(id) => {
-    const estoque = await Estoque.findByIdAndDelete( Types.ObjectId.createFromHexString(id));
-    if(!estoque){
-        throw new Error;
-    }
+    const estoque = await Estoque.findByIdAndDelete( Types.ObjectId.createFromHexString(id) );
+    if (!estoque) {
+        throw new Error();
+    }  
     return estoque;
 }
 const removeProduto = async (estoqueId, id) => {

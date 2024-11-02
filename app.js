@@ -1,7 +1,7 @@
 import express from 'express';
 import routes from './src/routes/routes.js';
 import session from 'express-session';
-import './src/init_database.js'; // Conecta ao BD
+import './src/initDatabase.js'; // Conecta ao BD
 
 const app = express();
 
@@ -46,5 +46,5 @@ app.use('/', routes);
 // Inicializando servidor
 const port = 3000;
 app.listen(port,'0.0.0.0',() => {
-    console.log(`\nServer running at http://localhost:${port}\n`);
+    console.log(`\nAplicação está rodando em http://localhost:${port}\n`);
 });

@@ -5,8 +5,10 @@ const MONGO = "mongodb://localhost:27017/mongodb";
 // mongodb://mongo:27017/meuBancoDados
 
 connect(MONGO)
-.then(() => console.log('\nConnection to MongoDB was successful!\n'))
-.catch(err => console.error('\nSomething went wrong with the MongoDB connection\nTry checking if the MongoDB Server is online\n', err));
+.then(() => console.log('\nConexão com MongoDB ocorreu bem!\n'))
+   .catch(err => console.error(
+      '\nAconteceu alguma coisa errada com a conexão com o MongoDB\nTente checar se o MongoDB está ligado no endereço:\n'
+      + MONGO + '\n', err));
 
 set('sanitizeFilter', true);
 
