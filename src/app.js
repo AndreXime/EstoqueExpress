@@ -1,7 +1,7 @@
 import express from 'express';
-import routes from './src/routes/routes.js';
+import routes from './routes/routes.js';
 import session from 'express-session';
-import './src/initDatabase.js'; // Conecta ao BD
+import './initDatabase.js'; // Conecta ao BD
 
 const app = express();
 
