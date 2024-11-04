@@ -1,7 +1,7 @@
 import express from 'express';
 import routes from './routes/routes.js';
 import session from 'express-session';
-import './initDatabase.js'; // Conecta ao BD
+import './models/initDatabase.js'; // Conecta ao BD
 
 const app = express();
 
@@ -42,6 +42,10 @@ app.use((req, res, next) => {
 
 // Rotas
 app.use('/', routes);
+app.use((req, res, next) => {
+  res.status(404).render("404");
+});
+
 
 // Inicializando servidor
 const port = 3000;

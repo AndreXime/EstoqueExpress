@@ -51,6 +51,9 @@ const dash = async (req,res) =>{
         res.render('dashboard',{ id , produtos });
     }
 }
+const publicEstoque = async (req, res) => {
+    res.render('public')
+}
 
 export default {
     home,
@@ -58,5 +61,6 @@ export default {
     dash,
     menu,
     sobrenos,
-    update
+    update,
+    publicEstoque
 };
