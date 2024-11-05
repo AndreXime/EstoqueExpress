@@ -52,9 +52,14 @@ const dash = async (req,res) =>{
     }
 }
 const publicEstoque = async (req, res) => {
-    res.render('public')
+    const estoques = await Estoque.getAllEstoques();
+    res.render('publicEstoques',{estoques})
 }
-
+const publicProdutos = async (req, res) => {
+    const estoques = await Estoque.searchOneEstoque(req.query.id) || null;
+    const produtos = estoques.produtosEstoque;
+    res.render("publicProdutos", { produtos });
+}
 export default {
     home,
     acess,
@@ -62,5 +67,6 @@ export default {
     menu,
     sobrenos,
     update,
-    publicEstoque
+    publicEstoque,
+    publicProdutos
 };

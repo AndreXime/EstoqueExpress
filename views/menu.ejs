@@ -24,8 +24,12 @@
             <form id="criarEstoque">
               <div class="input-group">
                 <div class="form-floating">
-                  <input aria-label="Titulo" aria-describedby="basic-addon2" placeholder="titulo" id="loginPassword" class="form-control" required type="text" name="titulo">
+                  <input aria-label="Titulo" aria-describedby="basic-addon2" class="form-control" required type="text" name="titulo">
                   <label for="titulo">Nome do estoque</label>
+                </div>
+                <div class="form-floating">
+                  <input aria-label="Descrição" aria-describedby="basic-addon2" class="form-control" required type="text" name="descricao">
+                  <label for="Descrição">Descrição</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Criar estoque</button>
               </div>
@@ -35,13 +39,13 @@
         </div>
       </div>
       <% if (estoques) { %>
-        <% estoques.forEach(function(nome){ %>
+        <% estoques.forEach(function(estoque){ %>
           <div class="col-md-3 mb-4 produto">
           <div class="card animar-criacao text-center">
             <div class="card-body">
-                <h4 class="card-title"> <%= nome.titulo %> </h4>
-                <p style="display: none;" id="id"> <%= nome._id %> </p>
-                <p class="card-text">Acesse seu estoque aqui</p>  
+                <h4 class="card-title"> <%= estoque.titulo %> </h4>
+                <p class="card-text"><%= estoque.descricao  %></p>
+                <p style="display: none;" id="id"> <%= estoque._id %> </p>
                 <button class="btn btn-success tabela">Entrar</button>
                 <button class="btn btn-danger remover">Remover</button>
             </div>

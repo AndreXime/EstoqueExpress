@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Estoques publicos</title>
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <link rel="icon" type="image/png" href="/img/icon.png">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<%- include('partials/nav') %>
+<main class="container flex-grow-1 my-4">
+   <section class="row">
+      <% estoques.forEach(estoque => { %>
+      <div class="col-md-4 mb-4">
+         <div class="card border-primary text-center">
+            <div class="card-header"><%= estoque.userOwnerName %> </div>
+            <div class="card-body">
+               <h5 class="card-title"><%= estoque.titulo %></h5>
+               <p class="card-text"><%= estoque.descricao %></p>
+               <a href="/produtos?id=<%= estoque._id %>" class="btn btn-primary">Ver estoque</a>
+            </div>
+         </div>
+      </div>
+      <% }); %>
+   </section>
+</main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

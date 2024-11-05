@@ -1,8 +1,13 @@
 import { Estoque } from '../models/models.js';
 import { Types } from 'mongoose';
 
-const createEstoque = async (userId,titulo) => {
-    const estoque = new Estoque({userOwner:userId,titulo:titulo});
+const createEstoque = async (userId,userName,titulo,descricao) => {
+    const estoque = new Estoque({
+      userOwner: userId,
+      userOwnerName: userName,
+      titulo: titulo,
+      descricao: descricao
+    });
     await estoque.save();
 
     return estoque._id; 
@@ -51,12 +56,16 @@ const removeProduto = async (estoqueId, id) => {
     );
     return resultado;
 }
-
+const getAllEstoques = async () => {
+    const estoques = await Estoque.find();
+    return estoques;
+}
 export default {
     createProduto,
     createEstoque,
     searchUserEstoques,
     searchOneEstoque,
     removeEstoque,
-    removeProduto
+    removeProduto,
+    getAllEstoques
 }

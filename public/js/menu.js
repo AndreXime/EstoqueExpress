@@ -23,16 +23,19 @@ atualizar();
 document.getElementById ('criarEstoque').addEventListener('submit', async function(event) {
    event.preventDefault();
 
-   const formData = new FormData(event.target);
-   const titulo = formData.get('titulo');
+  const formData = new FormData(event.target);
+  const titulo = formData.get('titulo');
+  const descricao = formData.get('descricao');
 
-   const response = await fetch('/api/addEstoque',{
-     method: 'Post',
-     headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({
-       titulo
-     })
-   });
+
+  const response = await fetch("/api/addEstoque", {
+    method: "Post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      titulo,
+      descricao,
+    }),
+  });
    if(!response){
      popupballon(false);
      return;
@@ -45,10 +48,10 @@ document.getElementById ('criarEstoque').addEventListener('submit', async functi
    card.classList.add('col-md-3', 'mb-4', 'produto'); // Adiciona classe para coluna e margem
    card.innerHTML = `
      <div class="card animar-criacao">
-       <div class="card-body text-center">
+       <div class="card-body text-center">  
          <h4 class="card-title"> ${titulo} </h4>
+         <p class="card-text">${descricao}</p>
          <p style="display: none;" id="id">${data}<p>
-         <p class="card-text">Acesse seu estoque aqui</p>  
          <button class="btn btn-success tabela">Entrar</button>
          <button class="btn btn-danger remover">Remover</button>
        </div>

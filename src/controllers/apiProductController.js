@@ -19,7 +19,12 @@ const addEstoque = async (req,res) =>{
         res.status(403).send("Forbidden");
     }else{
         try {
-            const estoquenovo = await Estoque.createEstoque(user._id,req.body.titulo);
+            const estoquenovo = await Estoque.createEstoque(
+              user._id,
+              user.name,
+              req.body.titulo,
+              req.body.descricao
+            );
             res.status(200).json(estoquenovo);
         }catch(err){
             res.status(400).send("Failed");

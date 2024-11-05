@@ -11,9 +11,11 @@ const produtoSchema = new Schema({
 });
 
 const estoqueSchema = new Schema({
-    userOwner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    titulo: { },
-    produtosEstoque: [produtoSchema]
+    userOwner: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    userOwnerName: {},
+    titulo: {},
+    descricao: {},
+    produtosEstoque: [produtoSchema],
 });
 
 const userSchema = new Schema({

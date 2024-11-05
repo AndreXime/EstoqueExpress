@@ -1,13 +1,14 @@
 import { Router } from 'express';
 const router = Router();
 import render from '../controllers/renderController.js';
-import apiUser from '../controllers/apiUserControllers.js';
-import apiProduct from "../controllers/apiProductControllers.js";
+import apiUser from '../controllers/apiUserController.js';
+import apiProduct from "../controllers/apiProductController.js";
 
 
 router.get('/', render.home);
 router.get('/entrar', render.acess);
-router.get('/publico', render.publicEstoque);
+router.get('/estoques', render.publicEstoque);
+router.get("/produtos", render.publicProdutos);
 router.get('/menu',render.menu);
 router.get('/dashboard',render.dash);
 router.get('/sobrenos',render.sobrenos);
