@@ -2,25 +2,23 @@ import Auth from "../services/userAuth.js";
 import Data from "../services/userData.js";
 
 const login = async (req, res) => {
-  delete req.session.result;
   try {
     const response = await Auth.loginUser(req.body);
-    req.session.usuario = response;
-    return res.redirect("/menu");
+    req.session.usuario = { name:response.name, _id:response._id };
+    return res.redirect("/empresa/menu");
   } catch (err) {
     req.session.result = err.errors;
-    return res.redirect("/entrar");
+    return res.redirect("/empresa/entrar");
   }
 };
 const register = async (req, res) => {
-  delete req.session.result;
   try {
     const response = await Auth.registerUser(req.body);
-    req.session.usuario = response;
-    return res.redirect("/menu");
+    req.session.usuario = { name: response.name, _id: response._id };
+    return res.redirect("/empresa/menu");
   } catch (err) {
     req.session.result = err.errors;
-    return res.redirect("/entrar");
+    return res.redirect("/empresa/entrar");
   }
 };
 const logout = async (req, res) => {
@@ -34,7 +32,7 @@ const update = async (req, res) => {
   } else {
     try {
       await Data.updateUser(user._id, req.body);
-      res.redirect("/atualizarConta");
+      res.redirect("/empresa/atualizarConta");
     } catch (error) {
       res.status(400).send("Failed");
     }

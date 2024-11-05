@@ -6,13 +6,14 @@ import apiProduct from "../controllers/apiProductController.js";
 
 
 router.get('/', render.home);
-router.get('/entrar', render.acess);
 router.get('/estoques', render.publicEstoque);
 router.get("/produtos", render.publicProdutos);
-router.get('/menu',render.menu);
-router.get('/dashboard',render.dash);
-router.get('/sobrenos',render.sobrenos);
-router.get('/atualizarConta', render.update);
+router.get('/sobrenos', render.sobrenos);
+
+router.get("/empresa/menu", render.menu);
+router.get("/empresa/dashboard", render.dash);
+router.get('/empresa/entrar', render.acess);
+router.get("/empresa/atualizarConta", render.update);
 
 router.post('/api/login', apiUser.login);
 router.post('/api/register', apiUser.register);

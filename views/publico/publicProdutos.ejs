@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="/img/icon.png">
 </head>
 <body class="d-flex flex-column min-vh-100">
-<%- include('partials/nav') %>
+<%- include('../partials/nav') %>
 
 <main class="container flex-grow-1 my-3">
   <div class="container">
@@ -23,7 +23,6 @@
               <th>Validade</th>
               <th>Categoria</th>
               <th>Fornecedor</th>
-              <th>Ações</th>
             </tr>
           </thead>
           <tbody id="objetoContainer">
@@ -45,10 +44,6 @@
                 <%- resultado %>
                 <td><%= card.categoria %></td>
                 <td><%= card.fornecedor %></td>
-                <td class="d-flex justify-content-center align-items-center">
-                  <p style="display:none" id="idProduto"> <%= card._id %> </p>
-                  <button class="btn btn-danger deletar">Apagar</button>
-                </td>
             </tr>
             <% }}); %>
           </tbody>
@@ -57,9 +52,8 @@
   </div>
 </main>
 
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>
 
 <script src="/js/bootstrap.bundle.js"></script>
-<script src="/js/dashboard.js"></script>
 </body>
 </html>
