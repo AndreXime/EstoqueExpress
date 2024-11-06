@@ -1,6 +1,6 @@
 import mongoose, { connect, set } from 'mongoose';
 
-const MONGO = "mongodb://localhost:27017/mongodb";
+const MONGO = process.env.MONGO_URI;
 // "mongodb://localhost:27017/mongodb"
 // mongodb://mongo:27017/meuBancoDados
 
