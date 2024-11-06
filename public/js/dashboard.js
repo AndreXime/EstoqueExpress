@@ -27,7 +27,7 @@ document.getElementById ('cardCreator').addEventListener('submit', async functio
   const criadoEm = new Date().toLocaleDateString();
   const id = document.getElementById('id').innerText.trim(); 
 
-  const response = await fetch(`/api/addProduto?id=${id}`,{
+  const response = await fetch(`/api/produto?id=${id}`,{
     method: 'Post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -85,8 +85,8 @@ function atualizar(){
        const closest = botao.closest('td');
        const idproduto = closest.querySelector('#idProduto').textContent.trim();
 
-       fetch(`/api/removeProduto?id=${id}&idproduto=${idproduto}`,{
-         method: 'Post',
+       fetch(`/api/produto?id=${id}&idproduto=${idproduto}`,{
+         method: 'delete',
          headers: { 'Content-Type': 'application/json' },
        });
 

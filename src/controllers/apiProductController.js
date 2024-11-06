@@ -7,7 +7,7 @@ const addProduto = async (req,res) =>{
     }else{
         try{
             const produtoNovo =  await Estoque.createProduto(req.query.id,req.body);
-            res.status(200).json(produtoNovo);
+            res.status(201).json(produtoNovo);
         }catch(err){
             res.status(400).send("Failed");
         }
@@ -16,7 +16,7 @@ const addProduto = async (req,res) =>{
 const addEstoque = async (req,res) =>{
     const user = req.session.usuario;
     if(!user){
-        res.status(403).send("Forbidden");
+        res.status(401).send("Unauthorized");
     }else{
         try {
             const estoquenovo = await Estoque.createEstoque(
@@ -25,9 +25,9 @@ const addEstoque = async (req,res) =>{
               req.body.titulo,
               req.body.descricao
             );
-            res.status(200).json(estoquenovo);
+            res.status(201).json(estoquenovo);
         }catch(err){
-            res.status(400).send("Failed");
+            res.status(400).send("Bad Request");
         }
     }
 }
@@ -35,29 +35,29 @@ const addEstoque = async (req,res) =>{
 const removeEstoque = async (req,res) =>{
     const user = req.session.usuario;
     if(!user){
-        res.status(403).send("Forbidden");
+        res.status(401).send("Unauthorized");
     }else{
         try{
             const id = req.query.id;
             await Estoque.removeEstoque(id);
-            res.status(200).send("Sucess");
+            res.status(202);
         }catch(err){
-            res.status(400).send("Failed");
+            res.status(400).send("Bad Request");
         }
     }
 }
 const removeProduto = async (req,res) =>{
     const user = req.session.usuario;
     if(!user){
-        res.status(403).send("Forbidden");
+        res.status(401).send("Unauthorized");
     }else{
         try{
             const id = req.query.id;
             const idproduto = req.query.idproduto
             await Estoque.removeProduto(id,idproduto);
-            res.status(200).send("Sucess");
+            res.status(202);
         }catch(err){
-            res.status(400).send("Failed");
+            res.status(400).send("Bad Request");
         }
     }
 }

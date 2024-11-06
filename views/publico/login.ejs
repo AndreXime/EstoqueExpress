@@ -24,7 +24,7 @@
   
 <%- include('../partials/nav') %>
 
-<main style="background-color: #faf9fa;" class="container larguradesktop largura p-5 my-4 flex-grow-1">
+<main style="background-color: #faf9fa;" class="container larguradesktop largura p-5 my-4 flex-grow-1 animar-criacao">
    <!-- Pills navs -->
   <ul style="cursor: pointer;background-color:#ffffff  ;" class="nav nav-pills nav-justified mb-5 text-white">
     <li class="nav-item">
@@ -39,7 +39,7 @@
   <!-- Pills content -->
   <div class="tab-content">
     <div class="tab-pane show active" id="pills-login">
-      <form action="/api/login" method="POST">
+      <form action="/api/user/login" method="post">
 
         <!-- Email input -->
         <div class="input-group mb-4">
@@ -82,7 +82,7 @@
     </div>
     
     <div class="tab-pane" id="pills-register">
-      <form action="/api/register" method="POST">
+      <form action="/api/user/register" method="post">
         <!-- Name input -->
       <div class="input-group mb-4">
         <span class="input-group-text" id="basic-addon1">

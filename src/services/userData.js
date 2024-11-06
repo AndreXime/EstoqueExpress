@@ -1,5 +1,5 @@
-import {User} from '../models/models.js';
-import {validate} from '../middlewares/validator.js'
+import {User, Estoque} from '../models/models.js';
+import { validate } from '../middlewares/validator.js';
 
 const searchUserById = async (id) => {
     const user = await User.findById(id);
@@ -23,10 +23,14 @@ const deleteUser = async (req) => {
 };
 
 const updateUser = async (userId, newUser) => {
-    const updatedUser = await User.findByIdAndUpdate(userId, newUser)
+    const updatedUser = await User.findByIdAndUpdate(userId, newUser, { new:true })
     if (!updatedUser) {
         throw {errors:{conta:['Usuario não existe']}} 
     }
+    await Estoque.updateMany(
+        { userOwner: updatedUser._id },
+        { userOwnerName: updatedUser.name }
+    );
     return updatedUser;
 };
 

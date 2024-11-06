@@ -88,12 +88,12 @@
                         }else if (diffDays < 0) { 
                             resultado = `<td style="background-color:red; color:white" class="text-center">VENCIDO</td>`;
                         } else { 
-                            resultado = `<td style="background-color:green; color:white" class="text-center">${diffDays} dias restantes</td>`;
+                            resultado = `<td style="background-color:green; color:white" class="text-center">${diffDays/30} meses restantes</td>`;
                         } 
             %>
             <tr class="animar-criacao">
                 <td><%= card.titulo %></td>
-                <td>R$: <%= Number(card.preco).toFixed(2) %></td>
+                <td><strong>R$:</strong> <%= Number(card.preco).toFixed(2) %></td>
                 <td><%= card.quantidade %></td>
                 <%- resultado %>
                 <td><%= card.categoria %></td>

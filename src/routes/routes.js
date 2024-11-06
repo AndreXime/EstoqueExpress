@@ -7,23 +7,23 @@ import apiProduct from "../controllers/apiProductController.js";
 
 router.get('/', render.home);
 router.get('/estoques', render.publicEstoque);
-router.get("/produtos", render.publicProdutos);
+router.get('/produtos', render.publicProdutos);
 router.get('/sobrenos', render.sobrenos);
 
 router.get("/empresa/menu", render.menu);
 router.get("/empresa/dashboard", render.dash);
-router.get('/empresa/entrar', render.acess);
+router.get("/empresa/entrar", render.acess);
 router.get("/empresa/atualizarConta", render.update);
 
-router.post('/api/login', apiUser.login);
-router.post('/api/register', apiUser.register);
-router.get('/api/logout', apiUser.logout);
-router.post('/api/update', apiUser.update);
+router.post('/api/user/login', apiUser.login);
+router.post('/api/user/register', apiUser.register);
+router.post('/api/user', apiUser.update);
+router.get('/api/user', apiUser.logout);
 
-router.post('/api/addProduto', apiProduct.addProduto);
-router.post('/api/addEstoque', apiProduct.addEstoque);
-router.post('/api/removeEstoque',apiProduct.removeEstoque);
-router.post('/api/removeProduto',apiProduct.removeProduto);
+router.post('/api/produto', apiProduct.addProduto);
+router.delete('/api/produto',apiProduct.removeProduto);
+router.post('/api/estoque', apiProduct.addEstoque);
+router.delete('/api/estoque',apiProduct.removeEstoque);
 
 
 

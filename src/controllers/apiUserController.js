@@ -28,13 +28,13 @@ const logout = async (req, res) => {
 const update = async (req, res) => {
   const user = req.session.usuario;
   if (!user) {
-    res.status(403).send("Forbidden");
+    res.status(401).send("Unauthorized");
   } else {
     try {
       await Data.updateUser(user._id, req.body);
       res.redirect("/empresa/atualizarConta");
     } catch (error) {
-      res.status(400).send("Failed");
+      res.status(400).send("Bad Request");
     }
   }
 };

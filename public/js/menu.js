@@ -28,7 +28,7 @@ document.getElementById ('criarEstoque').addEventListener('submit', async functi
   const descricao = formData.get('descricao');
 
 
-  const response = await fetch("/api/addEstoque", {
+  const response = await fetch("/api/estoque", {
     method: "Post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -82,8 +82,8 @@ function atualizar(){
      botao.addEventListener('click', function() {
        const cardbody = botao.closest('.card-body');
        const id = cardbody.querySelector('#id').textContent.trim();
-       fetch(`/api/removeEstoque?id=${id}`,{
-         method: 'Post',
+       fetch(`/api/estoque?id=${id}`,{
+         method: 'delete',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({ })
        });
