@@ -25,6 +25,9 @@ router.delete('/api/produto',apiProduct.removeProduto);
 router.post('/api/estoque', apiProduct.addEstoque);
 router.delete('/api/estoque',apiProduct.removeEstoque);
 
+router.use((req, res, next) => {
+  res.status(404).render("publico/404");
+});
 
 
 export default router;

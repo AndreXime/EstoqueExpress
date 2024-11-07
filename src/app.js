@@ -9,7 +9,6 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.set('x-powered-by', false);
 
-// Middlewares do proprio express
 app.use(express.json()); // Para entender requisições JSON
 app.use(express.static('public')); // Para arquivos estáticos
 app.use(express.urlencoded({ extended: true })); // Para entender dados de formulários
@@ -26,7 +25,6 @@ app.use(
   })
 );
 
-
 //Medir o tempo de resposta
 app.use((req, res, next) => {
     const start = process.hrtime();
@@ -42,10 +40,6 @@ app.use((req, res, next) => {
 
 // Rotas
 app.use('/', routes);
-app.use((req, res, next) => {
-  res.status(404).render("publico/404");
-});
-
 
 // Inicializando servidor
 const port = 3000;
