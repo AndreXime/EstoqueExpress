@@ -3,7 +3,17 @@ const router = Router();
 import render from '../controllers/renderController.js';
 import apiUser from '../controllers/apiUserController.js';
 import apiProduct from "../controllers/apiProductController.js";
+import { Types } from 'mongoose';
 
+declare module "express-session" {
+  interface SessionData {
+    usuario: { name: String; _id: Types.ObjectId };
+    error: {
+      contaR?: String; contaL?: String;
+      email?: String; password?: String;
+    };
+  }
+}
 
 router.get('/', render.home);
 router.get('/estoques', render.publicEstoque);

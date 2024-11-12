@@ -15,12 +15,12 @@ app.use(express.urlencoded({ extended: true })); // Para entender dados de formu
 
 app.use(
   session({
-    secret: process.env.SESSION_KEY, // Uma chave secreta para assinar o cookie da sessão
+    secret: process.env.SESSION_KEY || "a3A1njak2MC12DALJ", // Uma chave secreta para assinar o cookie da sessão
     resave: false, // Não salva a sessão de volta no store se ela não foi modificada
     saveUninitialized: true, // Salva sessões não inicializadas
     cookie: {
       secure: false,
-      maxAge: null,
+      maxAge: undefined,
     },
   })
 );
