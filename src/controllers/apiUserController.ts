@@ -1,7 +1,15 @@
 import Auth from "../services/userAuth.js";
 import Data from "../services/userData.js";
 
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
+
+export function checkAuth(req: Request, res: Response, next: NextFunction) {
+  if (!req.session.usuario) {
+    res.status(401).send("Unauthorized");
+  } else {
+    next();
+  }
+}
 
 const login = async (req: Request, res: Response) => {
   try {
@@ -29,21 +37,17 @@ const logout = async (req: Request, res: Response) => {
   res.redirect("/");
 };
 const update = async (req: Request, res: Response) => {
-  const user = req.session.usuario;
-  if (!user) {
-    res.status(401).send("Unauthorized");
-  } else {
-    try {
-      await Data.updateUser(user._id, req.body);
-      res.redirect("/empresa/atualizarConta");
-    } catch (err) {
-      res.status(400).send("Bad Request");
-    }
+  const user = req.session.usuario!;
+  try {
+    await Data.updateUser(user._id, req.body);
+    res.redirect("/empresa/atualizarConta");
+  } catch (err) {
+    res.status(400).send("Bad Request");
   }
 };
 export default {
-   login,
-   register,
-   logout,
-   update,
+  login,
+  register,
+  logout,
+  update, 
 }
