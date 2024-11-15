@@ -44,10 +44,12 @@ document.getElementById ('cardCreator').addEventListener('submit', async functio
   let resultado;
   if (!diffDays) {
     resultado = '<td style="background-color:grey" class="text-center">Não vence</td>';
-  } else if (diffDays < 0)
-    resultado = `<td style="background-color:red; color:white" class="text-center">VENCIDO</td>`;
-  else
-    resultado = `<td style="background-color:green; color:white">${diffDays} dias</td>`;
+  } else if (diffDays < 0) {
+    resultado = `<td style="color:red; font-weight:bold" class="text-center">VENCIDO</td>`;
+  } else {
+    resultado = `<td style="color:green;font-weight:bold;" class="text-center">${diffDays / 30} meses</td>`;
+  }
+  
 
   // Cria o elemento a ser animado
   const produto = document.createElement('tr');

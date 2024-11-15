@@ -86,9 +86,9 @@
                         if(!diffDays){
                           resultado = '<td style="background-color:grey" class="text-center">Não vence</td>'
                         }else if (diffDays < 0) { 
-                            resultado = `<td style="background-color:red; color:white" class="text-center">VENCIDO</td>`;
+                            resultado = `<td style="color:red;font-weight:bold;" class="text-center">VENCIDO</td>`;
                         } else { 
-                            resultado = `<td style="background-color:green; color:white" class="text-center">${diffDays/30} meses restantes</td>`;
+                            resultado = `<td style="color:green;font-weight:bold;" class="text-center">${diffDays/30} meses</td>`;
                         } 
             %>
             <tr class="animar-criacao">
