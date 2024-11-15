@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES6", // Define a versão do JavaScript de saída (ex: "es5", "es6", etc.)
-    "module": "ES6", // Define o tipo de módulo (ex: "commonjs", "es6", "amd")
-    "moduleResolution": "node",
+    "module": "NodeNext", // Define o tipo de módulo (ex: "commonjs", "es6", "amd")
+    "moduleResolution": "nodenext",
     "strict": true, // Ativa todas as verificações de tipo estritas
     "esModuleInterop": true, // Permite a interoperabilidade entre módulos CommonJS e ESModules
     "skipLibCheck": false, // Ignora a verificação de tipos de bibliotecas

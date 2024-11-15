@@ -1,6 +1,7 @@
 import express from 'express';
 import routes from './routes/routes.js';
 import session from 'express-session';
+import cors from "cors";
 import './models/initDatabase.js'; // Conecta ao BD
 
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.set('x-powered-by', false);
+app.use(cors());
 
 app.use(express.json()); // Para entender requisições JSON
 app.use(express.static('public')); // Para arquivos estáticos
